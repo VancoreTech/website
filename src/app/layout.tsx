@@ -1,4 +1,4 @@
-import './globals.css'
+/*import './globals.css'
 import { ReactNode } from 'react'
 
 export const metadata = {
@@ -21,7 +21,43 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </body>
     </html>
   );
+}*/
+
+// app/layout.tsx
+import type { ReactNode } from 'react'
+import './globals.css'
+
+export const metadata = {
+  title: 'Vancore',
+  description: 'Smart commerce for growing businesses',
 }
+
+export default function RootLayout({
+  children,
+}: {
+  children: ReactNode
+}) {
+  return (
+    <html lang="en">
+      <body className="overflow-x-hidden bg-background text-black font-sans">
+        {/* 
+          You may already have a <Navbar /> sitting ABOVE this <main>.
+          We just reserve 4rem (64px) at the top for it.
+        */}
+        <main
+          className="
+            mx-auto w-full 
+            max-w-screen-2xl 
+            px-4 sm:px-6 lg:px-8 
+          "
+        >
+          {children}
+        </main>
+      </body>
+    </html>
+  )
+}
+
 
 
 
