@@ -12,6 +12,7 @@ export interface FeatureItemProps {
   imageUrl?: string;        // screenshot URL
   fullWidth?: boolean;      // if true, spans only text (no image)
   reverse?: boolean;        // if true & md+, image on left
+  imageWidth?: number;
 }
 
 export default function FeatureItem({
