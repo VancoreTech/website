@@ -1,99 +1,164 @@
 // src/components/Navbar.tsx
 'use client';
 
+import { useState } from 'react';
 import Link from 'next/link';
-import { FiChevronDown } from 'react-icons/fi';
+import { FiChevronDown, FiMenu, FiX } from 'react-icons/fi';
 import Logo from '@/assets/logo.svg';
+import { motion } from 'framer-motion';
 
 export default function Navbar() {
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const [hovered, setHovered]     = useState(false);
+
   return (
-    <nav className="w-full bg-background/90 backdrop-blur-[22px]">
-      <div className="
-          mx-auto flex max-w-[1440px] w-full
-          pl-[100px] pr-[48px]  /* left 100px, right 48px */
-          py-[24px]
-          justify-between items-center
-        ">
+    <nav className="w-full bg-background/90 backdrop-blur-[22px] z-10">
+      {/* Container */}
+      <div className="mx-auto w-full max-w-screen-xl px-4 sm:px-6 lg:px-8 flex items-center justify-between py-6">
         {/* Logo */}
-        <Link href="/" className="inline-block">
-          <Logo className="w-[183px] h-[50px]" />
+        <Link href="/" className="flex-shrink-0">
+          <Logo className="w-36 h-auto" />
         </Link>
 
-        {/* Left nav links */}
-        <div className="flex items-center gap-8 text-[15px] font-sans text-secondary">
-          <div className="relative group cursor-pointer">
-            <span className="flex items-center gap-1">
-              Features <FiChevronDown size={16} />
-            </span>
-            <div className="absolute left-0 top-full mt-2 hidden group-hover:block w-48 rounded bg-white p-4 shadow-md">
-              <p className="text-sm text-secondary">Dropdown content</p>
-            </div>
-          </div>
-          <Link href="/" className="hover:underline">How it works</Link>
-          <Link href="/" className="hover:underline">Pricing</Link>
-          <Link href="/contact" className="hover:underline">Contact</Link>
-          <div className="relative group cursor-pointer">
-            <span className="flex items-center gap-1">
-              Company <FiChevronDown size={16} />
-            </span>
-            <div className="absolute left-0 top-full mt-2 hidden group-hover:block w-48 rounded bg-white p-4 shadow-md">
-              <p className="text-sm text-secondary">Dropdown content</p>
-            </div>
-          </div>
+        {/* Desktop Menu */}
+        <div className="hidden md:flex md:items-center md:space-x-8">
+          <MenuDropdown label="Features" />
+          <NavLink href="/">How it works</NavLink>
+          <NavLink href="/">Pricing</NavLink>
+          <NavLink href="/contact">Contact</NavLink>
+          <MenuDropdown label="Company" />
         </div>
 
-        {/* Right auth/CTA links */}
-        <div className="flex items-center gap-8">
-          {/* Log In pill */}
+        {/* Desktop Auth / CTA */}
+        <div className="hidden md:flex md:items-center md:space-x-4">
           <Link
             href="/login"
-            className="
-              flex items-center justify-center gap-2
-              px-[24px] py-[8px]
-              rounded-[8px]
-              text-[15px] font-sans text-grey-90
-            "
+            className="px-4 py-2 rounded-[8px] text-[15px] font-sans text-grey-90 hover:underline"
           >
             Log In
           </Link>
 
-          {/* Create Free Account */}
           <Link
             href="/signup"
-            className="
-              group relative flex flex-col items-center justify-end
-              w-[177px] h-[44px]
-              pt-[12px] pr-[19px] pb-0 pl-[21px]
-              gap-[15px]
-              rounded-[8px]
-              bg-[#0A6DEE]
-              shadow-[0px_12px_20px_-1px_rgba(59,115,255,0.40),
-                      0px_2px_1px_-1px_rgba(255,255,255,0.50)_inset,
-                      0px_-1px_2px_0px_rgba(16,24,40,0.60)_inset,
-                      0px_0px_0px_1px_#126BDF]
-              overflow-hidden
-            "
+            onMouseEnter={() => setHovered(true)}
+            onMouseLeave={() => setHovered(false)}
           >
-            <span className="
-              absolute inset-0 flex items-end justify-center pb-[12px]
-              text-white font-sans font-medium text-[15px]
-              transform transition-transform duration-300 ease-out
-              translate-y-0 group-hover:-translate-y-full
-            ">
-              Create Free Account
-            </span>
-            <span className="
-              absolute inset-0 flex items-end justify-center pb-[12px]
-              text-white font-sans font-medium text-[15px]
-              transform transition-transform duration-300 ease-out
-              translate-y-full group-hover:translate-y-0
-            ">
-              Get Started Now
-            </span>
+            <motion.div
+              className="relative w-[177px] h-[44px] rounded-[8px] bg-[#0A6DEE] shadow-[0px_12px_20px_-1px_rgba(59,115,255,0.40),0px_2px_1px_-1px_rgba(255,255,255,0.50)_inset,0px_-1px_2px_0px_rgba(16,24,40,0.60)_inset,0px_0px_0px_1px_#126BDF] overflow-hidden"
+            >
+              {/* Create Free Account */}
+              <motion.span
+                initial={{ y: 0, opacity: 1 }}
+                animate={hovered ? { y: -30, opacity: 0 } : { y: 0, opacity: 1 }}
+                transition={{ type: 'spring', stiffness: 320, damping: 40 }}
+                className="absolute inset-0 flex items-end justify-center pb-[12px] text-white font-sans font-medium text-[15px]"
+              >
+                Create Free Account
+              </motion.span>
+
+              {/* Get Started Now */}
+              <motion.span
+                initial={{ y: 30, opacity: 0 }}
+                animate={hovered ? { y: 0, opacity: 1 } : { y: 30, opacity: 0 }}
+                transition={{ type: 'spring', stiffness: 320, damping: 40 }}
+                className="absolute inset-0 flex items-end justify-center pb-[12px] text-white font-sans font-medium text-[15px]"
+              >
+                Get Started Now
+              </motion.span>
+            </motion.div>
           </Link>
         </div>
+
+        {/* Mobile menu button */}
+        <button
+          className="md:hidden p-2 text-2xl"
+          onClick={() => setMobileOpen(!mobileOpen)}
+          aria-label="Toggle menu"
+        >
+          {mobileOpen ? <FiX /> : <FiMenu />}
+        </button>
       </div>
+
+      {/* Mobile Panel */}
+      {mobileOpen && (
+        <div className="md:hidden bg-background/90 backdrop-blur-[22px]">
+          <div className="px-4 pt-2 pb-4 space-y-4">
+            <MenuDropdown label="Features" mobile />
+            <NavLink href="/" mobile>How it works</NavLink>
+            <NavLink href="/" mobile>Pricing</NavLink>
+            <NavLink href="/contact" mobile>Contact</NavLink>
+            <MenuDropdown label="Company" mobile />
+
+            <div className="pt-4 border-t border-grey-200 flex flex-col space-y-2">
+              <Link
+                href="/login"
+                className="block px-4 py-2 rounded-md text-sm font-medium text-grey-90"
+              >
+                Log In
+              </Link>
+              <Link
+                href="/signup"
+                className="block px-4 py-2 rounded-md bg-[#0A6DEE] text-white text-sm font-medium"
+              >
+                Create Free Account
+              </Link>
+            </div>
+          </div>
+        </div>
+      )}
     </nav>
   );
 }
 
+function NavLink({
+  href,
+  children,
+  mobile = false,
+}: {
+  href: string;
+  children: React.ReactNode;
+  mobile?: boolean;
+}) {
+  const base = mobile
+    ? 'block px-4 py-2 rounded-md text-sm font-medium text-secondary hover:bg-background/50'
+    : 'text-[15px] font-sans text-secondary hover:underline';
+
+  return (
+    <Link href={href} className={base}>
+      {children}
+    </Link>
+  );
+}
+
+function MenuDropdown({
+  label,
+  mobile = false,
+}: {
+  label: string;
+  mobile?: boolean;
+}) {
+  const trigger = mobile
+    ? 'flex items-center justify-between px-4 py-2 rounded-md text-sm font-medium text-secondary hover:bg-background/50'
+    : 'relative flex items-center space-x-1 text-[15px] font-sans text-secondary group cursor-pointer';
+  const menu = mobile
+    ? 'mt-1 space-y-1 pl-4'
+    : 'absolute left-0 top-full mt-2 hidden group-hover:block w-48 rounded bg-white p-4 shadow-md';
+
+  return (
+    <div className={mobile ? '' : 'relative'}>
+      <div className={trigger}>
+        <span>{label}</span>
+        <FiChevronDown size={16} />
+      </div>
+      <div className={menu}>
+        {/* Replace with actual links */}
+        <Link href="/" className="block py-1 text-sm text-secondary hover:underline">
+          Option 1
+        </Link>
+        <Link href="/" className="block py-1 text-sm text-secondary hover:underline">
+          Option 2
+        </Link>
+      </div>
+    </div>
+  );
+}

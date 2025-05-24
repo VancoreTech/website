@@ -5,13 +5,7 @@ import Image from 'next/image';
 export default function DashboardPreview() {
   return (
     <div
-      className="
-        relative
-        mx-auto my-[60px]
-        w-[877px] h-[618px]
-        rounded-[28px]
-        overflow-hidden
-      "
+      className="relative mx-auto my-16 w-full max-w-[877px] aspect-[877/618] rounded-[28px] overflow-hidden"
       style={{
         boxShadow:
           '0px 120px 34px 0px rgba(0,0,0,0.00),' +

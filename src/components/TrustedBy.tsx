@@ -16,20 +16,26 @@ const partners = [
   { src: '/images/image 7.png',     alt: 'Partner Nine' },
 ];
 
+// duplicate for seamless looping
 const logos = partners.concat(partners);
 
 export default function TrustedBy() {
   return (
-    <section className="flex flex-col items-center gap-8 py-16">
-      {/* label */}
-      <p className="text-sm font-medium text-secondary">
-        Trusted by 10K+ businesses
-      </p>
+    <section className="py-16 overflow-x-hidden">
+      {/* Heading container */}
+      <div className="mx-auto w-full max-w-screen-xl px-4 sm:px-6 lg:px-8 flex flex-col items-center gap-8">
+        <p className="text-sm font-medium text-secondary">
+          Trusted by 10K+ businesses
+        </p>
+      </div>
 
-      {/* full-bleed marquee wrapper */}
-      <div className="relative w-full overflow-hidden -mx-4 sm:-mx-6 lg:-mx-8">
+      {/* Marquee: added mt-4 for spacing */}
+      <div className="overflow-hidden mt-4">
         <motion.div
-          className="flex items-center gap-20 whitespace-nowrap"
+          className="
+            flex items-center gap-8 whitespace-nowrap
+            px-4 sm:px-6 lg:px-8
+          "
           animate={{ x: ['0%', '-50%'] }}
           transition={{
             ease: 'linear',
@@ -38,7 +44,7 @@ export default function TrustedBy() {
           }}
         >
           {logos.map((p, i) => (
-            <div key={`${p.src}-${i}`} className="flex-shrink-0">
+            <div key={i} className="flex-shrink-0">
               <Image
                 src={p.src}
                 alt={p.alt}
