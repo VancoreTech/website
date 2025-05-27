@@ -58,7 +58,7 @@ const PLANS = [
 
 export default function Pricing() {
   return (
-    <section className="absolute w-full overflow-hidden">
+    <section className="relative w-full overflow-hidden">
       {/* 1) full‐bleed, fading gradient + pattern */}
       <div className="absolute inset-0 -z-10">
         <Image
