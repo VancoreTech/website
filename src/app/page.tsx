@@ -1,5 +1,4 @@
 // src/app/page.tsx
-import Navbar from '@/components/Navbar'
 import Hero from '@/components/Hero'
 import DashboardPreview from '@/components/DashboardPreview'
 import TrustedBy from '@/components/TrustedBy'
@@ -15,7 +14,6 @@ import FAQSection from '@/components/FAQSection'
 export default function Home() {
   return (
     <>
-      <Navbar />
 
       {/* Hero / dashboard / logos all capped at ~1280px */}
       <main className="mx-auto w-full max-w-screen-xl px-4 sm:px-6 lg:px-8">
