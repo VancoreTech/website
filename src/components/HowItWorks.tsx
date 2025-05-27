@@ -83,7 +83,7 @@ export default function HowItWorks() {
       <div className="md:w-1/2 relative h-[300px] md:h-[540px] overflow-hidden">
         <motion.div style={{ y: tabletY }} className="absolute right-0">
           <Image
-            src="/images/galaxy-tab-s8-ultra.png"
+            src="/images/tablet.svg"
             alt="Vancore on tablet"
             width={720}
             height={540}
