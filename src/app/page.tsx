@@ -7,6 +7,7 @@ import FeaturesIntro from '@/components/FeaturesIntro'
 import FeaturesList from '@/components/FeaturesList'
 import HowItWorks from '@/components/HowItWorks'
 import ConnectPlatforms  from '@/components/ConnectPlatforms'
+import WallOfLove from '@/components/WallOfLove'
 
 
 export default function Home() {
@@ -46,8 +47,9 @@ export default function Home() {
   </div>
 </section>
 
-     
+
     <ConnectPlatforms />
+    <WallOfLove />
 
       {/* …whatever comes after… */}
     </>

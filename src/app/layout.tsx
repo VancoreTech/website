@@ -1,28 +1,3 @@
-/*import './globals.css'
-import { ReactNode } from 'react'
-
-export const metadata = {
-  title: 'Vancore',
-  description: 'Your platform for ...',
-}
-
-export default function RootLayout({ children }: { children: React.ReactNode }) {
-  return (
-    <html lang="en">
-      <body className="bg-background text-black font-sans overflow-x-hidden">
-        <main
-          className="
-            mx-auto w-full max-w-screen-xl
-            px-4 sm:px-6 lg:px-8
-          "
-        >
-          {children}
-        </main>
-      </body>
-    </html>
-  );
-}*/
-
 // app/layout.tsx
 import type { ReactNode } from 'react'
 import './globals.css'
