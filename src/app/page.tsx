@@ -9,6 +9,7 @@ import HowItWorks from '@/components/HowItWorks'
 import ConnectPlatforms  from '@/components/ConnectPlatforms'
 import WallOfLove from '@/components/WallOfLove'
 import Pricing from '@/components/Pricing'
+import FAQSection from '@/components/FAQSection'
 
 
 export default function Home() {
@@ -52,6 +53,7 @@ export default function Home() {
     <ConnectPlatforms />
     <WallOfLove />
     <Pricing />
+    <FAQSection />
 
       {/* …whatever comes after… */}
     </>
