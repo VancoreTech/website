@@ -2,6 +2,7 @@ import './globals.css'
 import React from 'react'
 import Navbar from '@/components/Navbar'
 import DownloadSection from '@/components/DownloadSection'
+import Footer from '@/components/Footer'
 
 
 export const metadata = {
@@ -23,6 +24,8 @@ export default function RootLayout({
           {children}
           <DownloadSection />
         </main>
+
+        <Footer />
 
       </body>
     </html>

@@ -9,7 +9,7 @@ export default function DownloadSection() {
     <section className="relative w-screen left-1/2 -translate-x-1/2 overflow-hidden pt-0 pb-16">
       {/* 1) curve at the bottom */}
       <div
-        className="absolute inset-x-0 bottom-0 translate-y-1/4 h-[850px] -z-10"
+        className="absolute inset-x-0 bottom-0 translate-y-1/4 h-[800px] -z-10"
         style={{ willChange: 'transform' }}
       >
         <Image
@@ -21,10 +21,10 @@ export default function DownloadSection() {
         />
       </div>
 
-      <div className="mx-auto max-w-screen-2xl flex flex-col-reverse md:flex-row items-center px-4 sm:px-6 lg:px-8 gap-12">
+      <div className="mx-auto max-w-screen-2xl flex flex-col-reverse md:flex-row items-center px-6 sm:px-8 lg:px-12 gap-12">
         {/* text + QR */}
-        <div className="w-full md:w-1/2 max-w-lg">
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-semibold text-gray-900">
+        <div className="w-full md:w-1/2 md:pr-12 max-w-lg">
+          <h2 className="text-2xl sm:text-4xl md:text-5xl font-semibold text-gray-900">
             Get smart order management at your fingertips
           </h2>
           <p className="mt-4 text-gray-600">
@@ -64,7 +64,7 @@ export default function DownloadSection() {
 
         {/* phone mockup */}
         <div className="w-full md:w-1/2 flex justify-center">
-          <div className="relative w-48 sm:w-64 md:w-72 lg:w-80 xl:w-[450px]">
+          <div className="relative w-48 sm:w-64 md:w-72 lg:w-80 -mb-100 md:-mb-16 xl:w-[450px]">
             <Image
               src="/images/phone-mockup.png"
               alt="Vancore app on phone"
