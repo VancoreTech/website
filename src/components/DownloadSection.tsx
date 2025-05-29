@@ -1,4 +1,3 @@
-// src/components/DownloadSection.tsx
 'use client'
 
 import Image from 'next/image'

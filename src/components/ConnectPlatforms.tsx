@@ -1,4 +1,3 @@
-// src/components/ConnectPlatforms.tsx
 'use client'
 
 import React from 'react'

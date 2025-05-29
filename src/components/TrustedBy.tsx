@@ -1,4 +1,3 @@
-// src/components/TrustedBy.tsx
 'use client';
 
 import { motion } from 'framer-motion';

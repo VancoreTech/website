@@ -1,4 +1,3 @@
-// src/components/FeaturesIntro.tsx
 'use client';
 
 export default function FeaturesIntro() {

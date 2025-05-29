@@ -1,32 +1,43 @@
-// src/components/Navbar.tsx
-'use client';
+'use client'
 
 import { useState } from 'react'
 import Link from 'next/link'
 import { FiChevronDown, FiMenu, FiX } from 'react-icons/fi'
+import {
+  FaGlobe,
+  FaFileAlt,
+  FaStore,
+  FaWallet,
+  FaLink,
+  FaHeart,
+  FaTrophy,
+  FaLightbulb,
+} from 'react-icons/fa'
 import Logo from '@/assets/logo.svg'
 import { motion } from 'framer-motion'
 
 export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false)
+  const [hovered, setHovered]       = useState(false)
 
   return (
     <nav className="w-full bg-background/90 backdrop-blur-[22px] z-10">
-      <div className="mx-auto w-full max-w-screen-xl px-4 sm:px-6 lg:px-8 flex items-center justify-between py-6">
+      <div className="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8 flex items-center justify-between py-6">
+        {/* Logo */}
         <Link href="/" className="flex-shrink-0">
           <Logo className="w-36 h-auto" />
         </Link>
 
-        {/* desktop */}
+        {/* Desktop Menu */}
         <div className="hidden md:flex md:items-center md:space-x-8">
           <MenuDropdown label="Features" />
           <NavLink href="/">How it works</NavLink>
           <NavLink href="/">Pricing</NavLink>
-          <NavLink href="/contact">Contact Us</NavLink>
+          <NavLink href="/contact">Contact</NavLink>
           <MenuDropdown label="Company" />
         </div>
 
-        {/* desktop CTA */}
+        {/* Desktop Auth / CTA */}
         <div className="hidden md:flex md:items-center md:space-x-4">
           <Link
             href="/login"
@@ -35,15 +46,15 @@ export default function Navbar() {
             Log In
           </Link>
           <Link href="/signup">
-            <CTAButton />
+            <CTAButton hovered={hovered} setHovered={setHovered} />
           </Link>
         </div>
 
-        {/* mobile toggle */}
+        {/* Mobile Toggle */}
         <button
           className="md:hidden p-2 text-2xl"
-          onClick={() => setMobileOpen(!mobileOpen)}
           aria-label="Toggle menu"
+          onClick={() => setMobileOpen((o) => !o)}
         >
           {mobileOpen ? <FiX /> : <FiMenu />}
         </button>
@@ -54,9 +65,15 @@ export default function Navbar() {
         <div className="md:hidden bg-background/90 backdrop-blur-[22px] py-10 px-4">
           <div className="flex flex-col space-y-4">
             <MenuDropdown label="Features" mobile />
-            <NavLink href="/" mobile>How it works</NavLink>
-            <NavLink href="/" mobile>Pricing</NavLink>
-            <NavLink href="/contact" mobile>Contact Us</NavLink>
+            <NavLink href="/" mobile>
+              How it works
+            </NavLink>
+            <NavLink href="/" mobile>
+              Pricing
+            </NavLink>
+            <NavLink href="/contact" mobile>
+              Contact Us
+            </NavLink>
             <MenuDropdown label="Company" mobile />
 
             <div className="mt-6 border-t border-grey-200 pt-6 flex flex-col space-y-4">
@@ -100,8 +117,13 @@ function NavLink({
   )
 }
 
-function CTAButton() {
-  const [hovered, setHovered] = useState(false)
+function CTAButton({
+  hovered,
+  setHovered,
+}: {
+  hovered: boolean
+  setHovered: (v: boolean) => void
+}) {
   return (
     <motion.div
       onMouseEnter={() => setHovered(true)}
@@ -137,15 +159,37 @@ function MenuDropdown({
 }) {
   const [open, setOpen] = useState(false)
 
-  // trigger styling
+  // trigger styles
   const trigger = mobile
     ? 'flex items-center justify-between px-4 py-2 rounded-md text-sm font-medium text-secondary hover:bg-background/50'
     : 'relative flex items-center space-x-1 text-[15px] font-sans text-secondary group cursor-pointer'
 
-  // menu styling
-  const menu = mobile
-    ? 'mt-1 space-y-1 pl-4'
-    : 'absolute left-0 top-full mt-2 hidden group-hover:block w-48 rounded bg-white p-4 shadow-md'
+  // mobile submenu container
+  const mobileMenu = 'mt-1 space-y-1 pl-4'
+
+  // desktop submenu container
+  const desktopMenu = [
+    'absolute left-0 top-full mt-2 hidden group-hover:flex flex-col',
+    'w-[352px] rounded-[24px] bg-white border border-gray-200',
+    'p-6 px-4 gap-3',
+    'shadow-[0px_193px_54px_0px_rgba(0,0,0,0.05)]',
+  ].join(' ')
+
+  // menu items
+  const features = [
+    { Icon: FaGlobe, title: 'Start selling online', desc: 'Set up your online store fast', bg: 'bg-purple-100 text-purple-600' },
+    { Icon: FaFileAlt, title: 'Manage your orders', desc: 'Easily keep track of all your orders', bg: 'bg-blue-100 text-blue-600' },
+    { Icon: FaStore, title: 'Orders & Customers', desc: 'Easily keep track of all your orders', bg: 'bg-green-100 text-green-600' },
+    { Icon: FaWallet, title: 'Payment & Invoices', desc: 'Seamlessly collect payments & issue invoices', bg: 'bg-yellow-100 text-yellow-600' },
+    { Icon: FaLink, title: 'Invoice links', desc: 'Create links you can share with customers to pay you', bg: 'bg-pink-100 text-pink-600' },
+  ]
+  const company = [
+    { Icon: FaHeart, title: 'About us', desc: 'Learn why over 10k+ businesses choose Vancore', bg: 'bg-purple-100 text-purple-600' },
+    { Icon: FaTrophy, title: 'Careers', desc: 'Build the future of commerce with us', bg: 'bg-green-100 text-green-600' },
+    { Icon: FaLightbulb, title: 'Blog', desc: 'Get helpful business tips & learn more about Vancore', bg: 'bg-yellow-100 text-yellow-600' },
+  ]
+
+  const items = label === 'Features' ? features : company
 
   return (
     <div className={mobile ? '' : 'relative'}>
@@ -157,26 +201,33 @@ function MenuDropdown({
         <FiChevronDown size={16} />
       </div>
 
-      {/* only render mobile submenu when open */}
       {mobile ? (
         open && (
-          <div className={menu}>
-            <Link href="/" className="block py-1 text-sm text-secondary hover:underline">
-              Option 1
-            </Link>
-            <Link href="/" className="block py-1 text-sm text-secondary hover:underline">
-              Option 2
-            </Link>
+          <div className={mobileMenu}>
+            {items.map(({ title }, i) => (
+              <Link key={i} href="/" className="block py-1 text-sm text-secondary hover:underline">
+                {title}
+              </Link>
+            ))}
           </div>
         )
       ) : (
-        <div className={menu}>
-          <Link href="/" className="block py-1 text-sm text-secondary hover:underline">
-            Option 1
-          </Link>
-          <Link href="/" className="block py-1 text-sm text-secondary hover:underline">
-            Option 2
-          </Link>
+        <div className={desktopMenu}>
+          {items.map(({ Icon, title, desc, bg }, i) => (
+            <Link
+              key={i}
+              href="#"
+              className="flex items-center gap-4 p-2 rounded-[14px] hover:bg-gray-50"
+            >
+              <div className={`${bg} p-2 rounded-full flex-shrink-0`}>
+                <Icon className="w-5 h-5" />
+              </div>
+              <div>
+                <p className="font-medium">{title}</p>
+                <p className="text-sm text-gray-500">{desc}</p>
+              </div>
+            </Link>
+          ))}
         </div>
       )}
     </div>

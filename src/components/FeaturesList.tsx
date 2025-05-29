@@ -1,4 +1,3 @@
-// src/components/FeaturesList.tsx
 'use client';
 
 import React from 'react';
