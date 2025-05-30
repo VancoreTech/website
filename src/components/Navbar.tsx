@@ -21,7 +21,7 @@ export default function Navbar() {
   const [hovered, setHovered]       = useState(false)
 
   return (
-    <nav className="w-full bg-background/90 backdrop-blur-[22px] z-10">
+    <nav className="w-full bg-background/90 backdrop-blur-[22px] z-10 overflow-visible">
       <div className="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8 flex items-center justify-between py-6">
         {/* Logo */}
         <Link href="/" className="flex-shrink-0">
@@ -169,7 +169,7 @@ function MenuDropdown({
 
   // desktop submenu container
   const desktopMenu = [
-    'absolute left-0 top-full mt-2 hidden group-hover:flex flex-col',
+    'absolute left-0 top-full mt-2 hidden group-hover:flex flex-col z-20',
     'w-[352px] rounded-[24px] bg-white border border-gray-200',
     'p-6 px-4 gap-3',
     'shadow-[0px_193px_54px_0px_rgba(0,0,0,0.05)]',
@@ -192,7 +192,7 @@ function MenuDropdown({
   const items = label === 'Features' ? features : company
 
   return (
-    <div className={mobile ? '' : 'relative'}>
+    <div className={mobile ? '' : 'relative group overflow-visible'}>
       <div
         className={trigger}
         onClick={() => mobile && setOpen((v) => !v)}
