@@ -32,7 +32,7 @@ export default function Navbar() {
         <div className="hidden md:flex md:items-center md:space-x-8">
           <MenuDropdown label="Features" />
           <NavLink href="/">How it works</NavLink>
-          <NavLink href="/">Pricing</NavLink>
+          <NavLink href="/pricingpage">Pricing</NavLink>
           <NavLink href="/contact">Contact</NavLink>
           <MenuDropdown label="Company" />
         </div>
@@ -68,7 +68,7 @@ export default function Navbar() {
             <NavLink href="/" mobile>
               How it works
             </NavLink>
-            <NavLink href="/" mobile>
+            <NavLink href="/pricingpage" mobile>
               Pricing
             </NavLink>
             <NavLink href="/contact" mobile>

@@ -1,4 +1,3 @@
-// src/app/page.tsx
 import Hero from '@/components/Hero'
 import DashboardPreview from '@/components/DashboardPreview'
 import TrustedBy from '@/components/TrustedBy'
