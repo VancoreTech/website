@@ -5,6 +5,7 @@ import Image from 'next/image'
 import PricingHeader from '@/components/PricingHeader'
 import PricingGrid   from '@/components/PricingGrid'
 import PricingCompare from '@/components/PricingCompare'
+import FAQPricing    from '@/components/FAQPricing'
 
 export default function PricingPage() {
   const [activeIndex, setActiveIndex] = useState<number>(0)
@@ -89,6 +90,11 @@ export default function PricingPage() {
         <PricingHeader activeIndex={activeIndex} onChange={setActiveIndex} />
         <PricingGrid   activeIndex={activeIndex} />
         <PricingCompare />
+
+         <div className="w-full mt-16">
+          <FAQPricing />
+        </div>
+        
       </main>
     </section>
   )
