@@ -1,4 +1,3 @@
-// File: src/components/PricingToggle.tsx
 import React from 'react'
 
 interface PricingToggleProps {

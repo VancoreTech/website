@@ -1,3 +1,4 @@
+// File: src/components/Navbar.tsx
 'use client'
 
 import { useState } from 'react'
@@ -21,7 +22,7 @@ export default function Navbar() {
   const [hovered, setHovered]       = useState(false)
 
   return (
-    <nav className="w-full bg-background/90 backdrop-blur-[22px] z-10 overflow-visible">
+    <nav className="w-full bg-background/90 backdrop-blur-[22px] z-50 overflow-visible">
       <div className="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8 flex items-center justify-between py-6">
         {/* Logo */}
         <Link href="/" className="flex-shrink-0">
@@ -157,61 +158,121 @@ function MenuDropdown({
   label: string
   mobile?: boolean
 }) {
+  // For both Features and Company menus:
   const [open, setOpen] = useState(false)
 
-  // trigger styles
+  // Common trigger styles:
   const trigger = mobile
     ? 'flex items-center justify-between px-4 py-2 rounded-md text-sm font-medium text-secondary hover:bg-background/50'
-    : 'relative flex items-center space-x-1 text-[15px] font-sans text-secondary group cursor-pointer'
+    : 'flex items-center space-x-1 text-[15px] font-sans text-secondary cursor-pointer'
 
-  // mobile submenu container
+  // Mobile submenu container:
   const mobileMenu = 'mt-1 space-y-1 pl-4'
 
-  // desktop submenu container
+  // Desktop submenu container (now with higher z-index):
   const desktopMenu = [
-    'absolute left-0 top-full mt-2 hidden group-hover:flex flex-col z-20',
+    'absolute left-0 top-full mt-2 flex flex-col z-60', // z-50 ensures it sits above page content
     'w-[352px] rounded-[24px] bg-white border border-gray-200',
     'p-6 px-4 gap-3',
     'shadow-[0px_193px_54px_0px_rgba(0,0,0,0.05)]',
   ].join(' ')
 
-  // menu items
+  // Menu items:
   const features = [
-    { Icon: FaGlobe, title: 'Start selling online', desc: 'Set up your online store fast', bg: 'bg-purple-100 text-purple-600' },
-    { Icon: FaFileAlt, title: 'Manage your orders', desc: 'Easily keep track of all your orders', bg: 'bg-blue-100 text-blue-600' },
-    { Icon: FaStore, title: 'Orders & Customers', desc: 'Easily keep track of all your orders', bg: 'bg-green-100 text-green-600' },
-    { Icon: FaWallet, title: 'Payment & Invoices', desc: 'Seamlessly collect payments & issue invoices', bg: 'bg-yellow-100 text-yellow-600' },
-    { Icon: FaLink, title: 'Invoice links', desc: 'Create links you can share with customers to pay you', bg: 'bg-pink-100 text-pink-600' },
+    {
+      Icon: FaGlobe,
+      title: 'Start selling online',
+      desc: 'Set up your online store fast',
+      bg: 'bg-purple-100 text-purple-600',
+    },
+    {
+      Icon: FaFileAlt,
+      title: 'Manage your orders',
+      desc: 'Easily keep track of all your orders',
+      bg: 'bg-blue-100 text-blue-600',
+    },
+    {
+      Icon: FaStore,
+      title: 'Orders & Customers',
+      desc: 'Easily keep track of all your orders',
+      bg: 'bg-green-100 text-green-600',
+    },
+    {
+      Icon: FaWallet,
+      title: 'Payment & Invoices',
+      desc: 'Seamlessly collect payments & issue invoices',
+      bg: 'bg-yellow-100 text-yellow-600',
+    },
+    {
+      Icon: FaLink,
+      title: 'Invoice links',
+      desc: 'Create links you can share with customers to pay you',
+      bg: 'bg-pink-100 text-pink-600',
+    },
   ]
   const company = [
-    { Icon: FaHeart, title: 'About us', desc: 'Learn why over 10k+ businesses choose Vancore', bg: 'bg-purple-100 text-purple-600' },
-    { Icon: FaTrophy, title: 'Careers', desc: 'Build the future of commerce with us', bg: 'bg-green-100 text-green-600' },
-    { Icon: FaLightbulb, title: 'Blog', desc: 'Get helpful business tips & learn more about Vancore', bg: 'bg-yellow-100 text-yellow-600' },
+    {
+      Icon: FaHeart,
+      title: 'About us',
+      desc: 'Learn why over 10k+ businesses choose Vancore',
+      bg: 'bg-purple-100 text-purple-600',
+    },
+    {
+      Icon: FaTrophy,
+      title: 'Careers',
+      desc: 'Build the future of commerce with us',
+      bg: 'bg-green-100 text-green-600',
+    },
+    {
+      Icon: FaLightbulb,
+      title: 'Blog',
+      desc: 'Get helpful business tips & learn more about Vancore',
+      bg: 'bg-yellow-100 text-yellow-600',
+    },
   ]
 
   const items = label === 'Features' ? features : company
 
-  return (
-    <div className={mobile ? '' : 'relative group overflow-visible'}>
-      <div
-        className={trigger}
-        onClick={() => mobile && setOpen((v) => !v)}
-      >
-        <span>{label}</span>
-        <FiChevronDown size={16} />
-      </div>
-
-      {mobile ? (
-        open && (
+  if (mobile) {
+    return (
+      <div>
+        <div
+          className={trigger}
+          onClick={() => setOpen((v) => !v)}
+        >
+          <span>{label}</span>
+          <FiChevronDown size={16} />
+        </div>
+        {open && (
           <div className={mobileMenu}>
             {items.map(({ title }, i) => (
-              <Link key={i} href="/" className="block py-1 text-sm text-secondary hover:underline">
+              <Link
+                key={i}
+                href="/"
+                className="block py-1 text-sm text-secondary hover:underline"
+              >
                 {title}
               </Link>
             ))}
           </div>
-        )
-      ) : (
+        )}
+      </div>
+    )
+  }
+
+  // --- DESKTOP VERSION (hover to open, delay close) ---
+  return (
+    <div
+      className="relative overflow-visible"
+      onMouseEnter={() => setOpen(true)}
+      onMouseLeave={() => setOpen(false)}
+    >
+      <div className={trigger}>
+        <span>{label}</span>
+        <FiChevronDown size={16} />
+      </div>
+
+      {open && (
         <div className={desktopMenu}>
           {items.map(({ Icon, title, desc, bg }, i) => (
             <Link

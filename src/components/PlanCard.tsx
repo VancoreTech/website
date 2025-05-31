@@ -1,4 +1,3 @@
-// File: src/components/PlanCard.tsx
 import React from 'react'
 
 interface PlanCardProps {

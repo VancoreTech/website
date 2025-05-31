@@ -1,4 +1,3 @@
-// File: src/components/PricingHeader.tsx
 import React from 'react'
 import PricingToggle from './PricingToggle'
 

@@ -1,4 +1,3 @@
-// File: src/components/PricingGrid.tsx
 import React from 'react'
 import PlanCard from './PlanCard'
 
