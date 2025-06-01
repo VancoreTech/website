@@ -10,8 +10,8 @@ export default function BlogHeader() {
   return (
     <section className="w-full bg-transparent py-12">
       <div className="mx-auto max-w-screen-2xl px-4 sm:px-6 lg:px-8 text-center">
-        {/* “OUR BLOG” label, in vancoreBlue */}
-        <p className="text-sm font-semibold tracking-wide text-vancoreBlue uppercase">
+        {/* “OUR BLOG” label in purple (#0A6DEE if that’s your brand blue, but we'll use text-purple-600) */}
+        <p className="text-sm font-semibold tracking-wide text-purple-600 uppercase">
           Our Blog
         </p>
 
@@ -22,8 +22,7 @@ export default function BlogHeader() {
 
         {/* Subheading */}
         <p className="mt-4 max-w-2xl mx-auto text-gray-600 text-base sm:text-lg">
-          Let us be your go-to for all things order and inventory management. 
-          Take a look at our helpful blog articles
+          Let us be your go-to for all things order and inventory management. Take a look at our helpful blog articles
         </p>
 
         {/* Search bar + blue icon */}
@@ -41,16 +40,16 @@ export default function BlogHeader() {
               py-3 pl-4 pr-12 
               text-gray-700 
               placeholder-gray-400 
-              focus:outline-none focus:ring-2 focus:ring-vancoreBlue
+              focus:outline-none focus:ring-2 focus:ring-purple-600
             "
           />
           <button
             type="button"
             className="
               absolute right-3 top-1/2 -translate-y-1/2 
-              text-white bg-vancoreBlue 
+              text-white bg-blue-600 
               p-2 rounded-full 
-              hover:bg-[#0856C1] 
+              hover:bg-blue-700 
               transition-colors
             "
           >

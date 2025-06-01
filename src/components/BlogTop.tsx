@@ -7,23 +7,24 @@ import Link from 'next/link';
 import { Post } from './BlogCard';
 
 interface BlogTopProps {
-  posts: Post[]; // expects at least 4 posts
+  posts: Post[]; // must be at least 4 posts
 }
 
 export default function BlogTop({ posts }: BlogTopProps) {
+  // Destructure: the first is “featured”; next three are “smallCards”
   const [featured, ...rest] = posts;
   const nextThree = rest.slice(0, 3);
 
   return (
     <section className="w-full bg-transparent">
-      {/* Outer wrapper fixed at 1240px (with side padding on smaller viewports) */}
+      {/* Centered container at max width 1240px */}
       <div className="mx-auto w-full max-w-[1240px] px-4 sm:px-6 lg:px-8 pb-16">
         <div className="flex flex-col lg:flex-row gap-8">
-          {/* ─── Left (Featured) Card ─── */}
+          {/* ─── Left (Featured) ─────────────────────────────────────────── */}
           <div className="w-full lg:w-[546px]">
-            <Link href={`/blog/${featured.slug}`} className="block w-full">
-              <div className="relative w-full h-[627px] rounded-lg overflow-hidden bg-white shadow-md">
-                {/* Large image (cover) */}
+            <Link href={`/blog/${featured.slug}`}>
+              <div className="relative w-full h-[627px] rounded-lg overflow-hidden bg-white shadow-md cursor-pointer">
+                {/* Large cover image */}
                 <Image
                   src={featured.coverImage}
                   alt={featured.title}
@@ -50,12 +51,16 @@ export default function BlogTop({ posts }: BlogTopProps) {
             </Link>
           </div>
 
-          {/* ─── Right Column (Three Small Cards) ─── */}
+          {/* ─── Right Column (3 smaller cards) ──────────────────────────── */}
           <div className="w-full lg:w-[694px] flex flex-col gap-6">
             {nextThree.map((p) => (
-              <Link key={p.slug} href={`/blog/${p.slug}`} className="block w-full">
-                <div className="flex w-full h-[187px] rounded-lg overflow-hidden bg-white shadow-sm">
-                  {/* Left half: thumbnail image */}
+              <Link
+                key={p.slug}
+                href={`/blog/${p.slug}`}
+                className="block w-full"
+              >
+                <div className="flex w-full h-[187px] rounded-lg overflow-hidden bg-white shadow-sm cursor-pointer">
+                  {/* Left half: thumbnail */}
                   <div className="relative w-1/2 h-full">
                     <Image
                       src={p.coverImage}
@@ -67,9 +72,7 @@ export default function BlogTop({ posts }: BlogTopProps) {
                   </div>
                   {/* Right half: date + title */}
                   <div className="w-1/2 px-4 py-3 flex flex-col justify-center">
-                    <p className="text-xs text-gray-400">
-                      {p.publishedAt}
-                    </p>
+                    <p className="text-xs text-gray-400">{p.publishedAt}</p>
                     <h4 className="mt-1 text-lg font-medium text-[#1D2939] leading-tight">
                       {p.title}
                     </h4>
