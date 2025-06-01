@@ -169,68 +169,79 @@ function MenuDropdown({
   // Mobile submenu container:
   const mobileMenu = 'mt-1 space-y-1 pl-4'
 
-  // Desktop submenu container (now with higher z-index):
+  // Desktop submenu container (with z-60 so it floats on top):
   const desktopMenu = [
-    'absolute left-0 top-full mt-2 flex flex-col z-60', // z-50 ensures it sits above page content
+    'absolute left-0 top-full mt-2 flex flex-col z-60',
     'w-[352px] rounded-[24px] bg-white border border-gray-200',
     'p-6 px-4 gap-3',
     'shadow-[0px_193px_54px_0px_rgba(0,0,0,0.05)]',
   ].join(' ')
 
-  // Menu items:
+  // Menu items for “Features”
   const features = [
     {
       Icon: FaGlobe,
       title: 'Start selling online',
       desc: 'Set up your online store fast',
+      href: '/features/start-selling',
       bg: 'bg-purple-100 text-purple-600',
     },
     {
       Icon: FaFileAlt,
       title: 'Manage your orders',
       desc: 'Easily keep track of all your orders',
+      href: '/features/manage-orders',
       bg: 'bg-blue-100 text-blue-600',
     },
     {
       Icon: FaStore,
       title: 'Orders & Customers',
-      desc: 'Easily keep track of all your orders',
+      desc: 'Keep all customer data organized',
+      href: '/features/orders-customers',
       bg: 'bg-green-100 text-green-600',
     },
     {
       Icon: FaWallet,
       title: 'Payment & Invoices',
-      desc: 'Seamlessly collect payments & issue invoices',
+      desc: 'Collect payments and issue invoices',
+      href: '/features/payment-invoices',
       bg: 'bg-yellow-100 text-yellow-600',
     },
     {
       Icon: FaLink,
       title: 'Invoice links',
-      desc: 'Create links you can share with customers to pay you',
+      desc: 'Share payment links with customers',
+      href: '/features/invoice-links',
       bg: 'bg-pink-100 text-pink-600',
     },
   ]
+
+  // Menu items for “Company”
   const company = [
     {
       Icon: FaHeart,
       title: 'About us',
       desc: 'Learn why over 10k+ businesses choose Vancore',
+      href: '/company/about',
       bg: 'bg-purple-100 text-purple-600',
     },
     {
       Icon: FaTrophy,
       title: 'Careers',
       desc: 'Build the future of commerce with us',
+      href: '/company/careers',
       bg: 'bg-green-100 text-green-600',
     },
     {
       Icon: FaLightbulb,
       title: 'Blog',
       desc: 'Get helpful business tips & learn more about Vancore',
+      href: '/blog',
       bg: 'bg-yellow-100 text-yellow-600',
     },
   ]
 
+  // Choose which list to render based on label
   const items = label === 'Features' ? features : company
 
   if (mobile) {
@@ -245,10 +256,10 @@ function MenuDropdown({
         </div>
         {open && (
           <div className={mobileMenu}>
-            {items.map(({ title }, i) => (
+            {items.map(({ title, href }, i) => (
               <Link
                 key={i}
-                href="/"
+                href={href}
                 className="block py-1 text-sm text-secondary hover:underline"
               >
                 {title}
@@ -274,10 +285,10 @@ function MenuDropdown({
 
       {open && (
         <div className={desktopMenu}>
-          {items.map(({ Icon, title, desc, bg }, i) => (
+          {items.map(({ Icon, title, desc, href, bg }, i) => (
             <Link
               key={i}
-              href="#"
+              href={href}
               className="flex items-center gap-4 p-2 rounded-[14px] hover:bg-gray-50"
             >
               <div className={`${bg} p-2 rounded-full flex-shrink-0`}>

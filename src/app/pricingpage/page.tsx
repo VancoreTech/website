@@ -15,55 +15,60 @@ export default function PricingPage() {
       {/*
         ─────────────────────────────────────────────────────────────
         BACKGROUND “BANDS” WRAPPER
-        (unchanged)
-      ─────────────────────────────────────────────────────────────
+        • We keep `absolute top-0 left-0 w-screen` so that
+          all child bands can use left-0 / right-0 to bleed fully.
+        ─────────────────────────────────────────────────────────────
       */}
       <div className="absolute top-0 left-0 w-screen overflow-visible -z-10">
-        {/* Right Band 3 */}
-        <div className="absolute top-[202px] right-0 w-[467px] h-[129px] opacity-75">
+        {/* ─ Right Band 3 (moved 50px higher: was 202, now 152) ─ */}
+        <div className="absolute top-[52px] right-0 w-[467px] h-[129px] opacity-75">
           <Image
             src="/images/right-band-3.svg"
-            alt=""
+            alt="Right Band 3"
             width={467}
             height={129}
             unoptimized
           />
         </div>
-        {/* Right Band 1 */}
-        <div className="absolute top-[350px] right-0 w-[467px] h-[129px] opacity-60">
+
+        {/* ─ Right Band 1 (moved 50px higher: was 350, now 300) ─ */}
+        <div className="absolute top-[150px] right-0 w-[467px] h-[129px] opacity-60">
           <Image
             src="/images/right-band-1.svg"
-            alt=""
+            alt="Right Band 1"
             width={467}
             height={129}
             unoptimized
           />
         </div>
-        {/* Right Band 2 */}
-        <div className="absolute top-[416px] right-0 w-[680px] h-[156px] opacity-50">
+
+        {/* ─ Right Band 2 (moved 50px higher: was 416, now 366) ─ */}
+        <div className="absolute top-[216px] right-0 w-[680px] h-[156px] opacity-50">
           <Image
             src="/images/right-band-2.svg"
-            alt=""
+            alt="Right Band 2"
             width={680}
             height={156}
             unoptimized
           />
         </div>
-        {/* Left Band 1 */}
-        <div className="absolute top-[558px] left-0 w-[467px] h-[129px] opacity-75">
+
+        {/* ─ Left Band 1 (moved 50px higher: was 558, now 508) ─ */}
+        <div className="absolute top-[318px] left-0 w-[467px] h-[129px] opacity-75">
           <Image
             src="/images/left-band-1.svg"
-            alt=""
+            alt="Left Band 1"
             width={467}
             height={129}
             unoptimized
           />
         </div>
-        {/* Left Band 2 */}
-        <div className="absolute top-[650px] left-0 w-[467px] h-[129px] opacity-60">
+
+        {/* ─ Left Band 2 (moved 50px higher: was 650, now 600) ─ */}
+        <div className="absolute top-[400px] left-0 w-[467px] h-[129px] opacity-60">
           <Image
             src="/images/left-band-2.svg"
-            alt=""
+            alt="Left Band 2"
             width={467}
             height={129}
             unoptimized
@@ -94,7 +99,7 @@ export default function PricingPage() {
          <div className="w-full mt-16">
           <FAQPricing />
         </div>
-        
+
       </main>
     </section>
   )
