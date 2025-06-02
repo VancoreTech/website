@@ -1,4 +1,3 @@
-// File: src/components/BlogCard.tsx
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -18,7 +17,6 @@ interface BlogCardProps {
 
 export default function BlogCard({ post }: BlogCardProps) {
   return (
-    // Wrap entire card in a Link (no nested <a>)
     <Link href={`/blog/${post.slug}`}>
       <div className="cursor-pointer flex flex-col bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow h-full">
         {/* ─── IMAGE ────────────────────────────────────────────────────────── */}
@@ -55,7 +53,7 @@ export default function BlogCard({ post }: BlogCardProps) {
             <p className="mt-2 text-[#667085] text-base">{post.excerpt}</p>
           </div>
 
-          {/* Bottom: “Read post ↗” (no underline) */}
+          {/* Bottom: “Read post ↗” */}
           <div className="mt-4">
             <span className="inline-flex items-center text-blue-600 text-sm font-medium">
               Read post&nbsp;

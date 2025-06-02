@@ -1,4 +1,3 @@
-// File: src/app/blog/page.tsx
 'use client'
 
 import React, { useState } from 'react'
@@ -9,7 +8,7 @@ import BlogGrid from '@/components/BlogGrid'
 import { Post } from '@/components/BlogCard'
 
 export default function BlogPage() {
-  // — STEP 1: Prepare the first 4 posts (for the “Featured + next 3” section)
+  //The first 4 posts (for the “Featured + next 3” section)
   const allPosts: Post[] = [
     {
       slug: 'how-online-payment-works-on-vancore',
@@ -45,13 +44,12 @@ export default function BlogPage() {
       category: 'Technology',
       publishedAt: 'Oct 16, 2024',
     },
-    // …you can add more posts here if you like…
   ]
 
-  // Grab the first 4 for BlogTop
+  // First 4 for BlogTop
   const featuredAndNextThree = allPosts.slice(0, 4)
 
-  // — STEP 2: Track which category tab is active
+  // Track which category tab is active
   const [activeCategory, setActiveCategory] = useState<Category>('All')
 
   return (

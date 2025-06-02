@@ -40,7 +40,7 @@ export default function Home() {
     background: 'linear-gradient(180deg, #0B121B 36.38%, #101925 63.62%)',
   }}
 >
-  {/* cap your content at 1280px again */}
+  {/* cap content at 1280px again */}
   <div className="mx-auto w-full max-w-screen-xl px-4 sm:px-6 lg:px-8 py-16">
     <HowItWorks />
   </div>
@@ -52,7 +52,6 @@ export default function Home() {
     <Pricing />
     <FAQSection />
 
-      {/* …whatever comes after… */}
     </>
   )
 }

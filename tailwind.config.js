@@ -17,7 +17,7 @@ module.exports = {
         gradientStart2: '#DC85F6',
         gradientEnd2: '#6673F6',
         
-        // More custom colors will be added as we meet them
+        // More custom colors will be added as I meet them
       },
       fontFamily: {
         sans: ["Sora", "sans-serif"],

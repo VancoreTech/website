@@ -54,7 +54,7 @@ export default function FeatureItem({
         style={{ height: `${height}px` }}
       >
         <div
-          className="w-full h-full flex flex-col justify-center p-6"
+          className="w-full h-full flex flex-col justify-top p-8"
           style={{ background: `linear-gradient(${gradient})` }}
         >
           <h3 className="text-2xl md:text-[32px] font-semibold text-[#1D2939] leading-[40px]">

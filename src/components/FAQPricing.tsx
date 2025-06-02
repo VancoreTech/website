@@ -1,4 +1,3 @@
-// File: src/components/FAQPricing.tsx
 'use client'
 
 import React from 'react'

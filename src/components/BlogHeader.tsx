@@ -1,4 +1,3 @@
-// File: src/components/BlogHeader.tsx
 'use client';
 
 import React, { useState } from 'react';
@@ -10,7 +9,6 @@ export default function BlogHeader() {
   return (
     <section className="w-full bg-transparent py-12">
       <div className="mx-auto max-w-screen-2xl px-4 sm:px-6 lg:px-8 text-center">
-        {/* “OUR BLOG” label in purple (#0A6DEE if that’s your brand blue, but we'll use text-purple-600) */}
         <p className="text-sm font-semibold tracking-wide text-purple-600 uppercase">
           Our Blog
         </p>

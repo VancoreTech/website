@@ -1,8 +1,8 @@
-// File: src/components/Navbar.tsx
 'use client'
 
-import { useState } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import Link from 'next/link'
+import { createPortal } from 'react-dom'
 import { FiChevronDown, FiMenu, FiX } from 'react-icons/fi'
 import {
   FaGlobe,
@@ -19,7 +19,7 @@ import { motion } from 'framer-motion'
 
 export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false)
-  const [hovered, setHovered]       = useState(false)
+  const [hovered, setHovered] = useState(false)
 
   return (
     <nav className="w-full bg-background/90 backdrop-blur-[22px] z-50 overflow-visible">
@@ -161,6 +161,21 @@ function MenuDropdown({
   // For both Features and Company menus:
   const [open, setOpen] = useState(false)
 
+  // Ref for trigger element (desktop) to calculate position
+  const triggerRef = useRef<HTMLDivElement>(null)
+  const [coords, setCoords] = useState<{ top: number; left: number }>({ top: 0, left: 0 })
+
+  // Update coords whenever menu opens
+  useEffect(() => {
+    if (open && triggerRef.current) {
+      const rect = triggerRef.current.getBoundingClientRect()
+      setCoords({
+        top: rect.bottom + window.scrollY,
+        left: rect.left + window.scrollX,
+      })
+    }
+  }, [open])
+
   // Common trigger styles:
   const trigger = mobile
     ? 'flex items-center justify-between px-4 py-2 rounded-md text-sm font-medium text-secondary hover:bg-background/50'
@@ -169,9 +184,10 @@ function MenuDropdown({
   // Mobile submenu container:
   const mobileMenu = 'mt-1 space-y-1 pl-4'
 
-  // Desktop submenu container (with z-60 so it floats on top):
-  const desktopMenu = [
-    'absolute left-0 top-full mt-2 flex flex-col z-60',
+  // Desktop submenu container (without positioning classes, since we place it via portal)
+  const desktopMenuPortal = [
+    'absolute',
+    'flex flex-col z-[9999]',
     'w-[352px] rounded-[24px] bg-white border border-gray-200',
     'p-6 px-4 gap-3',
     'shadow-[0px_193px_54px_0px_rgba(0,0,0,0.05)]',
@@ -247,10 +263,7 @@ function MenuDropdown({
   if (mobile) {
     return (
       <div>
-        <div
-          className={trigger}
-          onClick={() => setOpen((v) => !v)}
-        >
+        <div className={trigger} onClick={() => setOpen((v) => !v)}>
           <span>{label}</span>
           <FiChevronDown size={16} />
         </div>
@@ -271,37 +284,39 @@ function MenuDropdown({
     )
   }
 
-  // --- DESKTOP VERSION (hover to open, delay close) ---
+  // --- DESKTOP VERSION (click to open/close) with portal for proper stacking ---
   return (
-    <div
-      className="relative overflow-visible"
-      onMouseEnter={() => setOpen(true)}
-      onMouseLeave={() => setOpen(false)}
-    >
-      <div className={trigger}>
+    <div className="relative overflow-visible" ref={triggerRef}>
+      <div className={trigger} onClick={() => setOpen((v) => !v)}>
         <span>{label}</span>
         <FiChevronDown size={16} />
       </div>
 
-      {open && (
-        <div className={desktopMenu}>
-          {items.map(({ Icon, title, desc, href, bg }, i) => (
-            <Link
-              key={i}
-              href={href}
-              className="flex items-center gap-4 p-2 rounded-[14px] hover:bg-gray-50"
-            >
-              <div className={`${bg} p-2 rounded-full flex-shrink-0`}>
-                <Icon className="w-5 h-5" />
-              </div>
-              <div>
-                <p className="font-medium">{title}</p>
-                <p className="text-sm text-gray-500">{desc}</p>
-              </div>
-            </Link>
-          ))}
-        </div>
-      )}
+      {open &&
+        typeof document !== 'undefined' &&
+        createPortal(
+          <div
+            className={desktopMenuPortal}
+            style={{ top: coords.top, left: coords.left }}
+          >
+            {items.map(({ Icon, title, desc, href, bg }, i) => (
+              <Link
+                key={i}
+                href={href}
+                className="flex items-center gap-4 p-2 rounded-[14px] hover:bg-gray-50"
+              >
+                <div className={`${bg} p-2 rounded-full flex-shrink-0`}>
+                  <Icon className="w-5 h-5" />
+                </div>
+                <div>
+                  <p className="font-medium">{title}</p>
+                  <p className="text-sm text-gray-500">{desc}</p>
+                </div>
+              </Link>
+            ))}
+          </div>,
+          document.body
+        )}
     </div>
   )
 }

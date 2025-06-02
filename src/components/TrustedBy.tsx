@@ -28,7 +28,6 @@ export default function TrustedBy() {
         </p>
       </div>
 
-      {/* Marquee: added mt-4 for spacing */}
       <div className="overflow-hidden mt-4">
         <motion.div
           className="

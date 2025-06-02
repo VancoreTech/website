@@ -15,7 +15,6 @@ export default function DashboardPreview() {
           ' 0px 5px 11px 0px rgba(0,0,0,0.10)',
       }}
     >
-      {/* merged dashboard+logo @2x (1754×1236px on disk) */}
       <Image
         src="/images/dashboardandlogo1.jpg"
         alt="Vancore Dashboard preview"

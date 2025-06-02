@@ -1,4 +1,3 @@
-// File: src/components/BlogGrid.tsx
 'use client'
 
 import React, { useState } from 'react'
@@ -7,7 +6,7 @@ import { Category } from './BlogCategories'
 
 /**
  * Dummy data for “other posts.” 
- * Replace these objects with real data once your backend is ready.
+ * Replace these objects with real data - backend dev , lol.
  */
 const OTHER_POSTS: Post[] = [
   {
@@ -100,7 +99,7 @@ const OTHER_POSTS: Post[] = [
     category: 'Marketing',
     publishedAt: 'Aug 10, 2024',
   },
-  // …you can append more dummy posts here if needed…
+  // …more dummy posts here if needed…
 ]
 
 interface BlogGridProps {

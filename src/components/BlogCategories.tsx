@@ -1,4 +1,3 @@
-// File: src/components/BlogCategories.tsx
 'use client';
 
 import React, { useState } from 'react';
@@ -24,10 +23,6 @@ interface BlogCategoriesProps {
   onChange: (category: Category) => void;
 }
 
-/**
- * A horizontally scrolling (on mobile) tab bar for blog categories.
- * Highlights the active tab with purple text + underline.
- */
 export default function BlogCategories({ onChange }: BlogCategoriesProps) {
   const [activeCat, setActiveCat] = useState<Category>('All');
 

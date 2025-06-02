@@ -1,4 +1,3 @@
-// File: src/components/BlogTop.tsx
 'use client';
 
 import React from 'react';
