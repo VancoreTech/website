@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect } from 'react'
 import Link from 'next/link'
 import { createPortal } from 'react-dom'
+import { usePathname } from 'next/navigation'
 import { FiChevronDown, FiMenu, FiX } from 'react-icons/fi'
 import {
   FaGlobe,
@@ -161,11 +162,23 @@ function MenuDropdown({
   // For both Features and Company menus:
   const [open, setOpen] = useState(false)
 
-  // Ref for trigger element (desktop) to calculate position
+  // Refs for trigger element and menu container:
   const triggerRef = useRef<HTMLDivElement>(null)
-  const [coords, setCoords] = useState<{ top: number; left: number }>({ top: 0, left: 0 })
+  const menuRef = useRef<HTMLDivElement>(null)
 
-  // Update coords whenever menu opens
+  // Track dropdown position
+  const [coords, setCoords] = useState<{ top: number; left: number }>({
+    top: 0,
+    left: 0,
+  })
+
+  // Close menu on route change
+  const pathname = usePathname()
+  useEffect(() => {
+    setOpen(false)
+  }, [pathname])
+
+  // Update coords when menu opens
   useEffect(() => {
     if (open && triggerRef.current) {
       const rect = triggerRef.current.getBoundingClientRect()
@@ -173,6 +186,28 @@ function MenuDropdown({
         top: rect.bottom + window.scrollY,
         left: rect.left + window.scrollX,
       })
+    }
+  }, [open])
+
+  // Close when clicking outside trigger or menu
+  useEffect(() => {
+    if (!open) return
+
+    function handleClickOutside(event: MouseEvent) {
+      const target = event.target as Node
+      if (
+        triggerRef.current &&
+        !triggerRef.current.contains(target) &&
+        menuRef.current &&
+        !menuRef.current.contains(target)
+      ) {
+        setOpen(false)
+      }
+    }
+
+    document.addEventListener('mousedown', handleClickOutside)
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside)
     }
   }, [open])
 
@@ -184,7 +219,7 @@ function MenuDropdown({
   // Mobile submenu container:
   const mobileMenu = 'mt-1 space-y-1 pl-4'
 
-  // Desktop submenu container (without positioning classes, since we place it via portal)
+  // Desktop submenu container (positioned via portal)
   const desktopMenuPortal = [
     'absolute',
     'flex flex-col z-[9999]',
@@ -296,6 +331,7 @@ function MenuDropdown({
         typeof document !== 'undefined' &&
         createPortal(
           <div
+            ref={menuRef}
             className={desktopMenuPortal}
             style={{ top: coords.top, left: coords.left }}
           >
