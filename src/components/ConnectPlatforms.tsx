@@ -26,7 +26,7 @@ export default function ConnectPlatforms() {
         {/* on mobile, remove the wrapper’s px-4 gutters so the SVG spans edge-to-edge */}
         <div className="-mx-4 sm:mx-0">
           <Image
-            src="/connect-diagram.svg"
+            src="/connectplatformanimated.svg"
             alt="Connector diagram showing Vancore logo linking to various platforms"
             className="w-screen sm:w-full max-w-none h-auto"
             width={1200}

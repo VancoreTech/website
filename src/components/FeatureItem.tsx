@@ -1,17 +1,16 @@
 'use client';
 
 import Image from 'next/image';
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 export interface FeatureItemProps {
   title: React.ReactNode;
   description: React.ReactNode;
-  gradient: string;         // "134deg, #F9E7FF 10%, #C1D4F4 74%"
-  height: number;           // panel height in px
+  gradient: string;         // e.g. "134deg, #F9E7FF 10%, #C1D4F4 74%"
+  height: number;           // panel height in px when viewport ≥768px
   imageUrl?: string;        // screenshot URL
   fullWidth?: boolean;      // if true, spans only text (no image)
   reverse?: boolean;        // if true & md+, image on left
-  imageWidth?: number;
 }
 
 export default function FeatureItem({
@@ -25,12 +24,24 @@ export default function FeatureItem({
 }: FeatureItemProps) {
   const hasImage = !fullWidth && Boolean(imageUrl);
 
-  // on mobile: flex‐col; on md+: flex‐row or row‐reverse
+  // On md+ decide whether to reverse the flex-row
   const mdDir = hasImage
     ? reverse
       ? 'md:flex-row-reverse'
       : 'md:flex-row'
     : '';
+
+  // Track if viewport is narrower than 768px
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth < 768);
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  // Compute style for panel height: auto on mobile, fixed px otherwise
+  const panelHeight = isMobile ? 'auto' : `${height}px`;
 
   return (
     <div
@@ -51,10 +62,10 @@ export default function FeatureItem({
           rounded-[15px]
           overflow-hidden
         `}
-        style={{ height: `${height}px` }}
+        style={{ height: panelHeight }}
       >
         <div
-          className="w-full h-full flex flex-col justify-top p-8"
+          className="w-full h-full flex flex-col justify-start p-8"
           style={{ background: `linear-gradient(${gradient})` }}
         >
           <h3 className="text-2xl md:text-[32px] font-semibold text-[#1D2939] leading-[40px]">
@@ -70,7 +81,7 @@ export default function FeatureItem({
       {hasImage && (
         <div
           className="w-full md:w-5/12 rounded-[15px] overflow-hidden relative"
-          style={{ height: `${height}px` }}
+          style={{ height: panelHeight }}
         >
           <Image
             src={imageUrl!}
