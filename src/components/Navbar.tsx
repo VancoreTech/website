@@ -224,7 +224,7 @@ function MenuDropdown({
     'absolute',
     'flex flex-col z-[9999]',
     'w-[352px] rounded-[24px] bg-white border border-gray-200',
-    'p-6 px-4 gap-3',
+    'p-4 px-3 gap-2',                       // reduced from p-6 px-4 gap-3
     'shadow-[0px_193px_54px_0px_rgba(0,0,0,0.05)]',
   ].join(' ')
 
@@ -298,7 +298,10 @@ function MenuDropdown({
   if (mobile) {
     return (
       <div>
-        <div className={trigger} onClick={() => setOpen((v) => !v)}>
+        <div
+          className={trigger}
+          onClick={() => setOpen((v) => !v)}
+        >
           <span>{label}</span>
           <FiChevronDown size={16} />
         </div>
@@ -339,7 +342,7 @@ function MenuDropdown({
               <Link
                 key={i}
                 href={href}
-                className="flex items-center gap-4 p-2 rounded-[14px] hover:bg-gray-50"
+                className="flex items-center gap-4 p-1.5 rounded-[12px] hover:bg-gray-50"
               >
                 <div className={`${bg} p-2 rounded-full flex-shrink-0`}>
                   <Icon className="w-5 h-5" />
