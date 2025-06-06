@@ -6,11 +6,11 @@ import React, { useState, useEffect } from 'react';
 export interface FeatureItemProps {
   title: React.ReactNode;
   description: React.ReactNode;
-  gradient: string;         // e.g. "134deg, #F9E7FF 10%, #C1D4F4 74%"
-  height: number;           // panel height in px when viewport ≥768px
-  imageUrl?: string;        // screenshot URL
-  fullWidth?: boolean;      // if true, spans only text (no image)
-  reverse?: boolean;        // if true & md+, image on left
+  gradient: string;   // e.g. "134deg, #F9E7FF 10%, #C1D4F4 74%"
+  height: number;     // panel height in px when viewport ≥768px
+  imageUrl?: string;  // screenshot URL
+  fullWidth?: boolean; // if true, spans only text (no image)
+  reverse?: boolean;   // if true & md+, image on left
 }
 
 export default function FeatureItem({

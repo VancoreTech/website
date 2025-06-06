@@ -7,8 +7,8 @@ const features: FeatureItemProps[] = [
   {
     title: (
       <>
-        Launch your online store and start<br/>
-        selling in minutes
+        Launch your online store and <br/>
+        start selling in minutes
       </>
     ),
     description: (
@@ -20,7 +20,7 @@ const features: FeatureItemProps[] = [
     imageUrl: '/images/feature1.png',
     gradient: '134deg, #F9E7FF 10%, #E8C1F4 74%',
     height: 542,
-    imageWidth: 443,
+    // Removed `imageWidth: 443,` because FeatureItemProps no longer declares it
   },
   {
     title: (
@@ -43,8 +43,8 @@ const features: FeatureItemProps[] = [
   {
     title: (
       <>
-        Track your stock in real-time, without<br/>
-        guesswork
+        Track your stock in real-time, <br/>
+         without guesswork
       </>
     ),
     description: (
@@ -62,8 +62,8 @@ const features: FeatureItemProps[] = [
   {
     title: (
       <>
-        Get paid faster, securely, and on your<br/>
-        terms
+        Get paid faster, securely, and <br/>
+         on your terms
       </>
     ),
     description: (
@@ -99,11 +99,13 @@ const features: FeatureItemProps[] = [
 
 export default function FeaturesList() {
   return (
-    <section className="
+    <section
+      className="
         mx-auto w-full max-w-screen-xl
         px-4 sm:px-6 lg:px-8
         mt-12 space-y-12
-      ">
+      "
+    >
       {features.map((f, i) => (
         <FeatureItem key={i} {...f} />
       ))}
