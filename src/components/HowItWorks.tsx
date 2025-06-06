@@ -1,97 +1,289 @@
 'use client';
 
-import { useRef } from 'react';
-import { useScroll, useTransform, motion } from 'framer-motion';
+import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
+import { motion, useScroll, useTransform } from 'framer-motion';
 
+/**
+ * STEP 0: Make sure you have these full-laptop PNGs (frame+screen) in your /public/images folder:
+ *   - /public/images/laptop-mobile-A.png
+ *   - /public/images/laptop-mobile-B.png
+ *   - /public/images/laptop-mobile-C.png
+ *
+ * Each of these is a “complete” laptop mockup (frame + screen) exported from Figma at mobile size.
+ */
+const FULL_LAPTOPS = [
+  '/images/laptop-mobile-A.png',
+  '/images/laptop-mobile-B.png',
+  '/images/laptop-mobile-C.png',
+];
+
+/**
+ * The three steps / text blocks to render on the left (desktop) or stacked above (mobile).
+ */
 const STEPS = [
   {
-    number: '01',
     title: 'Sign up',
-    text:
-      'Download the app on your store, create an account with your name, phone number and email.',
+    description:
+      'Simply sign up with your name, phone number and email. You don’t need to pay anything',
   },
   {
-    number: '02',
     title: 'Add product',
-    text: 'Set up your store with product photos and specifications.',
+    description:
+      'Customize your Storefront with your colors, product photos, and more',
   },
   {
-    number: '03',
     title: 'Start selling',
-    text: 'Show your store live, start selling and accepting payments.',
+    description:
+      'Share your store link, start selling and accepting payments',
   },
 ];
 
+/**
+ * Text to display halfway along each vertical line:
+ * index 0 → between step 0 and step 1,
+ * index 1 → between step 1 and step 2.
+ */
+const MID_TEXTS: [string, string][] = [
+  [
+    'Simply sign up with your name, phone number and',
+    'email. You don’t need to pay anything.',
+  ],
+  [
+    'Customize your Storefront with your colors,',
+    'product photos and more.',
+  ],
+];
+
 export default function HowItWorks() {
-  // we'll watch this container's scroll progress
-  const ref = useRef<HTMLDivElement>(null);
+  // Index of the currently active step (0,1,2)
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  // Which mid‐line text to show (index of line); null = none
+  const [showMidText, setShowMidText] = useState<number | null>(null);
+
+  // Reference for the container we want to observe scroll within
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  // 1) Cycle through FULL_LAPTOPS every 3 seconds
+  useEffect(() => {
+    const iv = setInterval(() => {
+      setActiveIndex((prev) => (prev + 1) % FULL_LAPTOPS.length);
+    }, 3000);
+    return () => clearInterval(iv);
+  }, []);
+
+  // 2) Show/hide midpoint text
+  useEffect(() => {
+    if (activeIndex === 0) {
+      setShowMidText(null);
+      return;
+    }
+    const prev = activeIndex - 1;
+    const showTimer = setTimeout(() => {
+      setShowMidText(prev);
+    }, 1500);
+    const hideTimer = setTimeout(() => {
+      setShowMidText(null);
+    }, 3500);
+    return () => {
+      clearTimeout(showTimer);
+      clearTimeout(hideTimer);
+    };
+  }, [activeIndex]);
+
+  // 3) Use Framer Motion’s useScroll to track scroll progress of our container
   const { scrollYProgress } = useScroll({
-    target: ref,
-    // start animating when top of ref hits bottom of viewport
-    // finish when bottom of ref hits top of viewport
+    target: scrollRef,
     offset: ['start end', 'end start'],
   });
-  // slide tablet down from 0px → 200px
-  const tabletY = useTransform(scrollYProgress, [0, 1], ['0px', '200px']);
-  // timeline line goes from gray → blue
-  const lineColor = useTransform(
-    scrollYProgress,
-    [0, 0.1, 1],
-    ['#4A5568', '#06B6D4', '#06B6D4']
-  );
+
+  // Map scroll progress [0 → 1] to a vertical movement of the laptop [0px → 200px]
+  const laptopY = useTransform(scrollYProgress, [0, 1], ['0px', '200px']);
 
   return (
-    <div ref={ref} className="relative flex flex-col md:flex-row gap-12">
-      {/* LEFT: all your copy */}
-      <div className="md:w-1/2 flex flex-col">
-        <span className="text-sm font-semibold text-[#FBBF24]">HOW IT WORKS</span>
-        <h2 className="mt-2 text-3xl md:text-4xl font-bold text-white">
-          It takes only 5 minutes
+    <section
+      ref={scrollRef}
+      className="w-full py-12"
+      style={{
+        background: 'linear-gradient(180deg, #0B121B 36.38%, #101925 63.62%)',
+      }}
+    >
+      {/* TITLE */}
+      <div className="flex flex-col items-start mb-12 px-4 sm:px-6 lg:px-8">
+        <span className="self-stretch text-[#F68D0D] font-sora text-[12px] text-left">
+          HOW IT WORKS
+        </span>
+        <h2
+          className="mt-2 text-[#FCFCFD] font-sora text-[40px] font-semibold text-left"
+          style={{ lineHeight: '64px', letterSpacing: '-0.8px' }}
+        >
+          IT TAKES ONLY 5 MINUTES
         </h2>
+      </div>
 
-        {/* steps + vertical line */}
-        <div className="mt-8 flex">
-          {/* the timeline “rail” */}
-          <motion.div
-            style={{ backgroundColor: lineColor }}
-            className="w-1 bg-gray-500 rounded-l"
-          />
+      <div className="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row">
+        {/* ===================================== */}
+        {/* DESKTOP (≥768px): Steps on left, scrolling laptop on right */}
+        {/* ===================================== */}
+        <div className="hidden md:flex md:w-full">
+          {/* LEFT: Steps & Lines */}
+          <div className="w-1/2 flex flex-col items-start">
+            {STEPS.map((step, idx) => {
+              const isLast = idx === STEPS.length - 1;
+              return (
+                <div key={idx} className="flex flex-col items-start mb-40">
+                  <div className="flex items-center">
+                    {/* Circle */}
+                    <div
+                      className={`flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center ${
+                        activeIndex === idx
+                          ? 'bg-blue-500 text-white'
+                          : 'bg-gray-800 text-gray-400'
+                      }`}
+                    >
+                      {String(idx + 1).padStart(2, '0')}
+                    </div>
+                    {/* Title + description */}
+                    <div className="ml-6">
+                      <h3 className="text-white text-xl font-semibold">
+                        {step.title}
+                      </h3>
+                      <p className="mt-2 text-gray-300 max-w-sm">
+                        {step.description}
+                      </p>
+                      {isLast && (
+                        <button className="mt-4 px-6 py-2 bg-blue-500 text-white rounded-md text-sm">
+                          Get Started for Free
+                        </button>
+                      )}
+                    </div>
+                  </div>
 
-          {/* each step */}
-          <div className="ml-4 flex flex-col space-y-12">
-            {STEPS.map((step) => (
-              <div key={step.number} className="flex items-start gap-4">
-                <div className="flex-shrink-0">
-                  <div className="w-8 h-8 rounded-full bg-gray-700 flex items-center justify-center text-white font-mono">
-                    {step.number}
+                  {/* Vertical line + midpoint text */}
+                  {!isLast && (
+                    <div className="relative ml-5">
+                      {/* Gray full-height bar */}
+                      <div className="relative w-[2px] h-[480px] bg-gray-700 overflow-hidden">
+                        {/* Blue growing segment */}
+                        <div
+                          className={`absolute top-0 left-0 w-full bg-blue-500 transition-all duration-[3000ms] ${
+                            activeIndex > idx ? 'h-full' : 'h-0'
+                          }`}
+                        />
+                      </div>
+                      {/* Midpoint text */}
+                      <div className="absolute left-4 top-1/2 transform -translate-y-1/2">
+                        <span
+                          className={`block text-white transition-opacity duration-300 whitespace-nowrap ${
+                            showMidText === idx ? 'opacity-100' : 'opacity-0'
+                          }`}
+                        >
+                          {MID_TEXTS[idx][0]}
+                          <br />
+                          {MID_TEXTS[idx][1]}
+                        </span>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+
+          {/* RIGHT: Scrolling laptop image */}
+          <div className="w-1/2 flex justify-center items-start">
+            <motion.div
+              className="relative w-full max-w-2xl bg-transparent"
+              style={{ y: laptopY }}
+            >
+              <Image
+                src={FULL_LAPTOPS[activeIndex]}
+                alt={`Laptop screenshot ${activeIndex + 1}`}
+                width={1000}
+                height={625}
+                className="w-full h-auto rounded-lg bg-transparent"
+                placeholder="empty"
+                priority={activeIndex === 0}
+              />
+            </motion.div>
+          </div>
+        </div>
+
+        {/* ================================= */}
+        {/* MOBILE (≤767px): Steps stacked, static laptop below */}
+        {/* ================================= */}
+        <div className="flex flex-col md:hidden w-full">
+          {STEPS.map((step, idx) => {
+            const isLast = idx === STEPS.length - 1;
+            return (
+              <div key={idx} className="flex flex-col items-start mb-8">
+                <div className="flex items-center">
+                  {/* Circle */}
+                  <div
+                    className={`flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center ${
+                      activeIndex === idx
+                        ? 'bg-blue-500 text-white'
+                        : 'bg-gray-800 text-gray-400'
+                    }`}
+                  >
+                    {String(idx + 1).padStart(2, '0')}
+                  </div>
+                  {/* Title + description */}
+                  <div className="ml-4">
+                    <h3 className="text-white text-lg font-semibold">
+                      {step.title}
+                    </h3>
+                    <p className="mt-1 text-gray-300 max-w-xs">
+                      {step.description}
+                    </p>
+                    {isLast && (
+                      <button className="mt-4 px-6 py-2 bg-blue-500 text-white rounded-md text-sm">
+                        Get Started for free
+                      </button>
+                    )}
                   </div>
                 </div>
-                <div>
-                  <h3 className="text-xl font-semibold text-white">{step.title}</h3>
-                  <p className="mt-1 text-base text-gray-200 leading-relaxed">
-                    {step.text}
-                  </p>
-                </div>
+                {/* Vertical line + midpoint text */}
+                {!isLast && (
+                  <div className="relative ml-5">
+                    <div className="relative w-[2px] h-[480px] bg-gray-700 overflow-hidden">
+                      <div
+                        className={`absolute top-0 left-0 w-full bg-blue-500 transition-all duration-[3000ms] ${
+                          activeIndex > idx ? 'h-full' : 'h-0'
+                        }`}
+                      />
+                    </div>
+                    <div className="absolute left-4 top-1/2 transform -translate-y-1/2">
+                      <span
+                        className={`block text-white transition-opacity duration-300 whitespace-nowrap ${
+                          showMidText === idx ? 'opacity-100' : 'opacity-0'
+                        }`}
+                      >
+                        {MID_TEXTS[idx][0]}
+                        <br />
+                        {MID_TEXTS[idx][1]}
+                      </span>
+                    </div>
+                  </div>
+                )}
               </div>
-            ))}
+            );
+          })}
+
+          {/* Mobile laptop (static) */}
+          <div className="w-full max-w-xl mx-auto bg-transparent">
+            <Image
+              src={FULL_LAPTOPS[activeIndex]}
+              alt={`Mobile Laptop ${activeIndex + 1}`}
+              width={900}
+              height={562}
+              className="w-full h-auto rounded-lg bg-transparent"
+              placeholder="empty"
+            />
           </div>
         </div>
       </div>
-
-      {/* RIGHT: scrolling tablet image */}
-      <div className="md:w-1/2 relative h-[300px] md:h-[540px] overflow-hidden">
-        <motion.div style={{ y: tabletY }} className="absolute right-0">
-          <Image
-            src="/images/tablet.svg"
-            alt="Vancore on tablet"
-            width={720}
-            height={540}
-            className="object-contain"
-            priority
-          />
-        </motion.div>
-      </div>
-    </div>
+    </section>
   );
 }

@@ -61,7 +61,7 @@ export default function Hero() {
             className="
               absolute inset-0 flex items-end justify-center pb-[12px]
               text-white font-sans font-medium text-[15px]
-              transform transition-transform duration-300 ease-out
+              transform transition-transform duration-500 ease-out
               translate-y-0 group-hover:-translate-y-full
             "
           >
@@ -71,7 +71,7 @@ export default function Hero() {
             className="
               absolute inset-0 flex items-end justify-center pb-[12px]
               text-white font-sans font-medium text-[15px]
-              transform transition-transform duration-300 ease-out
+              transform transition-transform duration-500 ease-out
               translate-y-full group-hover:translate-y-0
             "
           >
