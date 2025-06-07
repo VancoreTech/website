@@ -3,6 +3,9 @@
 @tailwind components;
 @tailwind utilities;
 
+@import 'react-phone-number-input/style.css';
+
+
 body {
   @apply font-sans;
 }
