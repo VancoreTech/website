@@ -2,6 +2,7 @@ import React from 'react'
 import AboutHero   from '@/components/AboutHero'
 import AboutImage  from '@/components/AboutImage'
 import TrustedBy   from '@/components/TrustedBy'
+import AboutStory  from '@/components/AboutStory'
 
 export default function AboutPage() {
   return (
@@ -13,6 +14,7 @@ export default function AboutPage() {
 
       {/* trusted-by logos marquee */}
       <TrustedBy />
+      <AboutStory />
 
     </main>
   )
