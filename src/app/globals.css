@@ -3,7 +3,7 @@
 @tailwind components;
 @tailwind utilities;
 
-@import 'react-phone-number-input/style.css';
+@import 'react-phone-input-2/lib/style.css';
 
 
 body {
