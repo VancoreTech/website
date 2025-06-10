@@ -6,6 +6,8 @@ import AboutStory  from '@/components/AboutStory'
 import AboutMission from '@/components/AboutMission'
 import MeetTheTeam from '@/components/MeetTheTeam'
 import InvestorBacking from '@/components/InvestorBacking'
+import ResourcesSection from '@/components/ResourcesSection'
+
 
 
 
@@ -21,6 +23,7 @@ export default function AboutPage() {
 
       <MeetTheTeam />
       <InvestorBacking />
+      <ResourcesSection />
 
     </main>
   )
