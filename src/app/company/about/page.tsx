@@ -10,9 +10,7 @@ export default function AboutPage() {
   return (
     <main>
       <AboutHero />
-
       <AboutImage />
-
       <TrustedBy />
       <AboutStory />
       <AboutMission />
