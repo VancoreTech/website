@@ -20,7 +20,6 @@ export default function AboutPage() {
       <TrustedBy />
       <AboutStory />
       <AboutMission />
-
       <MeetTheTeam />
       <InvestorBacking />
       <ResourcesSection />
