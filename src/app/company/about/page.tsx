@@ -9,10 +9,8 @@ export default function AboutPage() {
     <main>
       <AboutHero />
 
-      {/* hero image section */}
       <AboutImage />
 
-      {/* trusted-by logos marquee */}
       <TrustedBy />
       <AboutStory />
 
