@@ -3,6 +3,8 @@ import AboutHero   from '@/components/AboutHero'
 import AboutImage  from '@/components/AboutImage'
 import TrustedBy   from '@/components/TrustedBy'
 import AboutStory  from '@/components/AboutStory'
+import AboutMission from '@/components/AboutMission'
+
 
 export default function AboutPage() {
   return (
@@ -13,6 +15,7 @@ export default function AboutPage() {
 
       <TrustedBy />
       <AboutStory />
+      <AboutMission />
 
     </main>
   )
