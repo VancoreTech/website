@@ -12,7 +12,6 @@ export default function CareersPage() {
     <main className="overflow-x-hidden">
       <CareersHero />
       <CareersGallery />
-
      <WhyVancore />
 
 
