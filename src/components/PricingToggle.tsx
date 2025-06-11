@@ -21,7 +21,7 @@ export default function PricingToggle({
             key={label}
             onClick={() => onChange(idx)}
             className={`
-              relative flex-1 px-6 py-2 text-sm font-medium 
+              relative flex-1 px-8 py-3 text-base font-medium whitespace-nowrap
               ${
                 isActive
                   ? 'bg-vancoreBlue text-white'
