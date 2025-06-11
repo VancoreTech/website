@@ -42,12 +42,12 @@ export default function Navbar() {
         {/* Desktop Auth / CTA */}
         <div className="hidden md:flex md:items-center md:space-x-4">
           <Link
-            href="/login"
+            href="https://app.getvancore.com"
             className="px-4 py-2 rounded-[8px] text-[15px] font-sans text-grey-90 hover:underline"
           >
             Log In
           </Link>
-          <Link href="/signup">
+          <Link href="https://app.getvancore.com">
             <CTAButton hovered={hovered} setHovered={setHovered} />
           </Link>
         </div>
@@ -80,13 +80,13 @@ export default function Navbar() {
 
             <div className="mt-6 border-t border-grey-200 pt-6 flex flex-col space-y-4">
               <Link
-                href="/login"
+                href="https://app.getvancore.com"
                 className="w-full text-center py-3 rounded-md text-sm font-medium text-grey-90"
               >
                 Log In
               </Link>
               <Link
-                href="/signup"
+                href="https://app.getvancore.com"
                 className="w-full text-center py-3 rounded-md bg-[#0A6DEE] text-white text-sm font-medium"
               >
                 Create Free Account
@@ -311,7 +311,9 @@ function MenuDropdown({
               <Link
                 key={i}
                 href={href}
-                className="block py-1 text-sm text-secondary hover:underline"
+                className={`block py-1 text-sm text-secondary hover:underline ${
+                  label === 'Features' ? 'pointer-events-none' : ''
+                }`}
               >
                 {title}
               </Link>
@@ -342,7 +344,9 @@ function MenuDropdown({
               <Link
                 key={i}
                 href={href}
-                className="flex items-center gap-4 p-1.5 rounded-[12px] hover:bg-gray-50"
+                className={`flex items-center gap-4 p-1.5 rounded-[12px] hover:bg-gray-50 ${
+                  label === 'Features' ? 'pointer-events-none' : ''
+                }`}
               >
                 <div className={`${bg} p-2 rounded-full flex-shrink-0`}>
                   <Icon className="w-5 h-5" />
