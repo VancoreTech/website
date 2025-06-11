@@ -42,7 +42,7 @@ export default function Hero() {
       <div className="flex flex-col sm:flex-row items-center gap-6">
         {/* Primary CTA */}
         <Link
-          href="/signup"
+          href="https://app.getvancore.com"
           className="
             group relative flex flex-col items-center justify-end
             w-[177px] h-[44px]
