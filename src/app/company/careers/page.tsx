@@ -9,7 +9,6 @@ export default function CareersPage() {
   return (
     <main className="overflow-x-hidden">
       <CareersHero />
-
       <CareersGallery />
 
     </main>
