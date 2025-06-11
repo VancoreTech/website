@@ -3,7 +3,6 @@
 import React from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-// ← import the four icons from react-icons
 import { FaLinkedin, FaInstagram, FaTwitter, FaFacebook } from 'react-icons/fa'
 
 export default function Footer() {
@@ -30,7 +29,7 @@ export default function Footer() {
                 <FaLinkedin size={24} />
               </Link>
               <Link
-                href="https://instagram.com"
+                href="https://instagram.com/myvancore"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="hover:text-white transition-colors"
@@ -38,7 +37,7 @@ export default function Footer() {
                 <FaInstagram size={24} />
               </Link>
               <Link
-                href="https://twitter.com"
+                href="https://x.com/myvancore"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="hover:text-white transition-colors"
@@ -59,17 +58,17 @@ export default function Footer() {
           {/* Company Links */}
           <div className="flex flex-col items-center md:items-start space-y-2">
             <h4 className="text-white font-semibold">Company</h4>
-            <Link href="/about">About Vancore</Link>
-            <Link href="/careers">Careers</Link>
+            <Link href="/company/about">About Vancore</Link>
+            <Link href="/company/careers">Careers</Link>
             <Link href="/contact">Contact Us</Link>
           </div>
 
           {/* Support Info */}
           <div className="flex flex-col items-center md:items-start space-y-2">
             <h4 className="text-white font-semibold">Support</h4>
-            <Link href="tel:+17013582142">+1 701 358 2142</Link>
-            <Link href="tel:+17013582143">+1 701 358 2143</Link>
-            <Link href="mailto:info@vancore.ng">info@vancore.ng</Link>
+            <Link href="tel:+614052619882">+61 405 261 9882</Link>
+            <Link href="tel:+447401956683">+44 7401 956683</Link>
+            <Link href="mailto:tech@getvancore.com">tech@getvancore.com</Link>
           </div>
         </div>
 
@@ -77,8 +76,8 @@ export default function Footer() {
         <div className="border-t border-gray-700 pt-6 pb-8 flex flex-col md:flex-row justify-center md:justify-between items-center text-sm space-y-4 md:space-y-0">
           <p>© {new Date().getFullYear()} Vancore. All rights reserved.</p>
           <div className="flex space-x-6">
-            <Link href="/terms">Terms &amp; Service</Link>
-            <Link href="/privacy">Privacy Policy</Link>
+            <span className="cursor-not-allowed">Terms &amp; Service</span>
+            <span className="cursor-not-allowed">Privacy Policy</span>
           </div>
         </div>
       </div>
