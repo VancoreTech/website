@@ -16,11 +16,6 @@ export default function CareersPage() {
       <CareersGallery />
      <WhyVancore />
      <OpenRoles />
-
-
-
-
-
     </main>
   )
 }
