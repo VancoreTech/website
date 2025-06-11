@@ -1,6 +1,7 @@
 'use client'
 
 import Image from 'next/image'
+import Link from 'next/link'
 import React from 'react'
 
 const PLANS = [
@@ -128,11 +129,12 @@ export default function Pricing() {
                 {/* description */}
                 <p className="mt-2 text-sm text-[#6B7280]">{plan.description}</p>
 
-                {/* 5) call-to-action button (before features) */}
+                {/* 5) call-to-action link (before features) */}
                 <div className="mt-6">
-                  <button
+                  <Link
+                    href="https://app.getvancore.com"
                     className={`
-                      w-full py-3 rounded-full font-medium overflow-hidden relative
+                      w-full block text-center py-3 rounded-full font-medium overflow-hidden relative
                       transition-colors duration-200
                       ${plan.darkBg
                         ? 'bg-blue-600 text-white hover:bg-blue-500'
@@ -142,7 +144,7 @@ export default function Pricing() {
                     <span className="inline-block transition-transform duration-300 group-hover:-translate-y-1">
                       {plan.buttonText}
                     </span>
-                  </button>
+                  </Link>
                 </div>
 
                 {/* 6) features list */}
