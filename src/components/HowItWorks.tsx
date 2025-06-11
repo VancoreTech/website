@@ -69,12 +69,10 @@ export default function HowItWorks() {
     };
   }, [activeIndex]);
 
-  // Compute initial wrapper offset and attach scroll handler
   useEffect(() => {
     const container = scrollRef.current;
     const laptop = laptopRef.current;
     if (!container || !laptop) return;
-    // initial distance from top of container to top of laptop
     const containerRect = container.getBoundingClientRect();
     const laptopRect = laptop.getBoundingClientRect();
     initialOffsetRef.current = laptopRect.top - containerRect.top;
@@ -86,13 +84,11 @@ export default function HowItWorks() {
       const raw = (windowHeight - cTop) / (cHeight + windowHeight);
       const clamped = Math.min(Math.max(raw, 0), 1);
       const laptopHeight = laptop.offsetHeight;
-      // subtract initial offset so laptop bottom aligns at container bottom
       const maxOffset = cHeight - laptopHeight - initialOffsetRef.current;
       laptop.style.transform = `translateY(${clamped * maxOffset}px)`;
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
-    // initial position preserved until user scrolls    handleScroll();
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
