@@ -12,13 +12,7 @@ export default function PricingPage() {
 
   return (
     <section className="relative w-full overflow-visible bg-transparent">
-      {/*
-        ─────────────────────────────────────────────────────────────
-        BACKGROUND “BANDS” WRAPPER
-        • Keep `absolute top-0 left-0 w-screen` so that
-          all child bands can use left-0 / right-0 to bleed fully.
-        ─────────────────────────────────────────────────────────────
-      */}
+     
       <div className="absolute top-0 left-0 w-screen overflow-visible -z-10">
         {/* ─ Right Band 3 */}
         <div className="absolute top-[52px] right-0 w-[467px] h-[129px] opacity-75">

@@ -1,4 +1,7 @@
+'use client'
+
 import React from 'react'
+import Link from 'next/link'
 import PlanCard from './PlanCard'
 
 // Define Tier data with a numeric “monthly” price so we can multiply
@@ -27,7 +30,13 @@ const TIERS: TierData[] = [
     name: 'Standard',
     monthlyPrice: 25000,
     description: 'For solopreneurs with few products & a small customer base.',
-    features: ['Everything in free plus', 'Feature 1', 'Feature 2', 'Feature 3', 'Feature 4'],
+    features: [
+      'Everything in free plus',
+      'Feature 1',
+      'Feature 2',
+      'Feature 3',
+      'Feature 4',
+    ],
     buttonText: 'Get started for free',
     popular: true,
     darkBg: true,
@@ -37,7 +46,13 @@ const TIERS: TierData[] = [
     monthlyPrice: 250000,
     description:
       'For large scale businesses with multiple stores, staff and a large inventory.',
-    features: ['Everything Standard plus', 'Feature 1', 'Feature 2', 'Feature 3', 'Feature 4'],
+    features: [
+      'Everything Standard plus',
+      'Feature 1',
+      'Feature 2',
+      'Feature 3',
+      'Feature 4',
+    ],
     buttonText: 'Contact us',
     popular: false,
     darkBg: false,
@@ -81,18 +96,24 @@ export default function PricingGrid({ activeIndex }: PricingGridProps) {
 
         const priceLabel = formatCurrency(rawAmount)
 
+        // wrap each card so its button (and the card) links to the app
         return (
-          <PlanCard
+          <Link
             key={tier.name}
-            tierName={tier.name}
-            priceLabel={priceLabel}
-            unitLabel={unitLabel}
-            description={tier.description}
-            features={tier.features}
-            buttonText={tier.buttonText}
-            popular={tier.popular}
-            darkBg={tier.darkBg}
-          />
+            href="https://app.getvancore.com"
+            className="block"
+          >
+            <PlanCard
+              tierName={tier.name}
+              priceLabel={priceLabel}
+              unitLabel={unitLabel}
+              description={tier.description}
+              features={tier.features}
+              buttonText={tier.buttonText}
+              popular={tier.popular}
+              darkBg={tier.darkBg}
+            />
+          </Link>
         )
       })}
     </div>
