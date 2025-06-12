@@ -14,7 +14,7 @@ const OTHER_POSTS: Post[] = [
     title: 'Accepting Payments in Nigeria: What Works Best',
     excerpt:
       'A simple breakdown of payment methods Nigerian businesses can use—and how Vancore supports them.',
-    coverImage: '/images/blog1.jpg',
+    coverImage: '/images/blog1.png',
     category: 'Feature',
     publishedAt: 'Oct 22, 2024',
   },
@@ -23,7 +23,7 @@ const OTHER_POSTS: Post[] = [
     title: '5 Easy SEO Tips for Your New Online Store',
     excerpt:
       'Improve your search rankings without spending a dime on ads.',
-    coverImage: '/images/blog2.jpg',
+    coverImage: '/images/blog2.png',
     category: 'Tips',
     publishedAt: 'Oct 18, 2024',
   },
@@ -32,7 +32,7 @@ const OTHER_POSTS: Post[] = [
     title: 'Choosing the Right Hosting for Your Ecommerce Site',
     excerpt:
       'Shared vs. VPS vs. dedicated: which hosting tier makes sense for you?',
-    coverImage: '/images/blog3.jpg',
+    coverImage: '/images/blog3.png',
     category: 'Technology',
     publishedAt: 'Oct 12, 2024',
   },
@@ -41,7 +41,7 @@ const OTHER_POSTS: Post[] = [
     title: '5 Tips to Keep Your Online Store Secure',
     excerpt:
       'Practical measures you can take to protect customer data and payment information.',
-    coverImage: '/images/blog4.jpg',
+    coverImage: '/images/blog2.png',
     category: 'Technology',
     publishedAt: 'Oct 10, 2024',
   },
@@ -50,7 +50,7 @@ const OTHER_POSTS: Post[] = [
     title: 'From Signups to Sales: Boosting Customer Success with Vancore',
     excerpt:
       'Discover how to onboard new merchants effectively and reduce churn with in-app guidance.',
-    coverImage: '/images/blog5.jpg',
+    coverImage: '/images/blog1.png',
     category: 'Customer Success',
     publishedAt: 'Oct 02, 2024',
   },
@@ -59,7 +59,7 @@ const OTHER_POSTS: Post[] = [
     title: 'Why Mobile Optimization Matters in 2024',
     excerpt:
       'Ensure your store is mobile-friendly to capture today’s on-the-go shoppers.',
-    coverImage: '/images/blog6.jpg',
+    coverImage: '/images/blog3.png',
     category: 'Tips',
     publishedAt: 'Sep 25, 2024',
   },
@@ -68,7 +68,7 @@ const OTHER_POSTS: Post[] = [
     title: 'Top 7 Low-Cost Marketing Strategies for Small Shops',
     excerpt:
       'Effective, budget-friendly ways to put your store in front of more eyes.',
-    coverImage: '/images/blog7.jpg',
+    coverImage: '/images/blog2.png',
     category: 'Marketing',
     publishedAt: 'Sep 15, 2024',
   },
@@ -77,7 +77,7 @@ const OTHER_POSTS: Post[] = [
     title: 'SEO Best Practices for E-commerce in 2024',
     excerpt:
       'Learn how to optimize your product pages to rank higher in Google search.',
-    coverImage: '/images/blog8.jpg',
+    coverImage: '/images/blog3.png',
     category: 'Technology',
     publishedAt: 'Sep 01, 2024',
   },
@@ -86,7 +86,7 @@ const OTHER_POSTS: Post[] = [
     title: 'How to Leverage Customer Feedback to Improve Sales',
     excerpt:
       'Turning real-world feedback into actionable improvements for your store.',
-    coverImage: '/images/blog9.jpg',
+    coverImage: '/images/blog1.png',
     category: 'Customer Success',
     publishedAt: 'Aug 20, 2024',
   },
@@ -95,7 +95,7 @@ const OTHER_POSTS: Post[] = [
     title: 'Running Effective Email Campaigns in 2024',
     excerpt:
       'Tips on building a mailing list and writing copy that converts.',
-    coverImage: '/images/blog10.jpg',
+    coverImage: '/images/blog3.png',
     category: 'Marketing',
     publishedAt: 'Aug 10, 2024',
   },

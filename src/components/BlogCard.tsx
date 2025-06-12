@@ -3,12 +3,12 @@ import Link from 'next/link';
 import Image from 'next/image';
 
 export interface Post {
-  slug: string;         // e.g. 'accepting-payments-works-best'
-  title: string;        // e.g. 'Accepting Payments in Nigeria: What Works Best'
-  excerpt: string;      // e.g. 'A simple breakdown…'
-  coverImage: string;   // e.g. '/images/blog1.jpg'
-  category: string;     // e.g. 'Features'
-  publishedAt: string;  // e.g. 'Oct 22, 2024'
+  slug: string;    
+  title: string;       
+  excerpt: string;     
+  coverImage: string;  
+  category: string;     
+  publishedAt: string;  
 }
 
 interface BlogCardProps {
