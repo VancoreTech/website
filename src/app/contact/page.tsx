@@ -1,11 +1,17 @@
 'use client'
 
 import React, { useState } from 'react'
-import PhoneInput from 'react-phone-input-2'
+import dynamic from 'next/dynamic'
 import 'react-phone-input-2/lib/style.css'
 import { HiOutlineMail } from 'react-icons/hi'
 import { FiMapPin, FiPhone } from 'react-icons/fi'
 import FAQSection from '@/components/FAQSection'
+
+// Dynamically import PhoneInput to avoid SSR/client mismatch
+const PhoneInput = dynamic(
+  () => import('react-phone-input-2'),
+  { ssr: false }
+)
 
 export default function ContactPage() {
   const [form, setForm] = useState({
@@ -89,13 +95,16 @@ export default function ContactPage() {
                 <div className="ml-4">
                   <h4 className="font-medium text-[#1D2939]">Call us</h4>
                   <p className="text-gray-500 text-sm">Sun–Sat from 8 am to 6 pm.</p>
-                  <p className="mt-1 text-gray-700 text-sm">+234 (0) 701 358 2143</p>
+                  <p className="mt-1 text-gray-700 text-sm">
+                    +61 405 261 9882<br/>
+                    +44 7401 956683
+                  </p>
                 </div>
               </div>
             </div>
           </div>
 
-          {/* Right: FormSubmit form */}
+          {/* Right: Form */}
           <div>
             <h3 className="text-xl font-semibold text-[#1D2939] mb-2">
               Send a message
@@ -108,9 +117,7 @@ export default function ContactPage() {
               method="POST"
               className="space-y-4 bg-white p-6 rounded-lg shadow"
             >
-              {/* Disable FormSubmit captcha */}
               <input type="hidden" name="_captcha" value="false" />
-              {/* Redirect to Thank You page */}
               <input
                 type="hidden"
                 name="_next"
@@ -173,7 +180,7 @@ export default function ContactPage() {
                   Phone Number
                 </label>
                 <PhoneInput
-                  country={'ng'}
+                  country={'au'}
                   value={form.phone}
                   onChange={(phone) =>
                     setForm((f) => ({ ...f, phone: phone || '' }))
