@@ -14,12 +14,12 @@ const STEPS = [
   {
     title: 'Sign up',
     description:
-      'Simply sign up with your name, phone number and email. You don’t need to pay anything',
+      'Download the app on your store, create an account with your name, phone number and email',
   },
   {
     title: 'Add product',
     description:
-      'Customize your Storefront with your colors, product photos, and more',
+      'Setup your Store with product photos, and specifications',
   },
   {
     title: 'Start selling',
