@@ -19,7 +19,7 @@ export default function BlogTop({ posts }: BlogTopProps) {
         <div className="flex flex-col lg:flex-row gap-8">
           {/* ─── Featured (vertical split) ────────────────────────────────── */}
           <div className="w-full lg:w-[546px]">
-            <Link href={`/blog/${featured.slug}`}> 
+            <Link href="/blog">
               <div className="flex flex-col w-full h-[627px] rounded-lg overflow-hidden bg-white shadow-md cursor-pointer">
                 {/* Top half: cover image */}
                 <div className="relative w-full h-1/2">
@@ -55,7 +55,7 @@ export default function BlogTop({ posts }: BlogTopProps) {
             {nextThree.map((p) => (
               <Link
                 key={p.slug}
-                href={`/blog/${p.slug}`}
+                href="/blog"
                 className="block w-full"
               >
                 <div className="flex w-full h-[187px] rounded-lg overflow-hidden bg-white shadow-sm cursor-pointer">

@@ -1,14 +1,16 @@
+'use client';
+
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 
 export interface Post {
-  slug: string;    
-  title: string;       
-  excerpt: string;     
-  coverImage: string;  
-  category: string;     
-  publishedAt: string;  
+  slug: string;
+  title: string;
+  excerpt: string;
+  coverImage: string;
+  category: string;
+  publishedAt: string;
 }
 
 interface BlogCardProps {
@@ -17,7 +19,7 @@ interface BlogCardProps {
 
 export default function BlogCard({ post }: BlogCardProps) {
   return (
-    <Link href={`/blog/${post.slug}`}>
+    <Link href="/blog">
       <div className="cursor-pointer flex flex-col bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow h-full">
         {/* ─── IMAGE ────────────────────────────────────────────────────────── */}
         <div className="relative w-full h-[280px] sm:h-[300px] md:h-[320px]">
