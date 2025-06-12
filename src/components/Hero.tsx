@@ -81,7 +81,7 @@ export default function Hero() {
 
         {/* Secondary CTA */}
         <Link
-          href="/contact"
+          href="mailto:tech@getvancore.com"
           className="
             px-6 py-2
             rounded-[8px]
