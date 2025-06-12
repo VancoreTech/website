@@ -13,7 +13,7 @@ const RESOURCES = [
     label: 'Careers',
     title: 'Join us, and build the future of global work',
     imageSrc: '/images/resources/careers.png',
-    href: 'company/careers',
+    href: '/company/careers',
     buttonText: 'Join us',
   },
   {
